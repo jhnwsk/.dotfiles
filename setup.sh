@@ -30,19 +30,15 @@ cp .antigenrc ~/.antigenrc
 curl -sS https://starship.rs/install.sh | sh
 finished "zsh/antigen/starship"
 
-begin "gogh/nerd-fonts/gnome terminal" "because what you're really after... is sway"
-bash -c "$(wget -qO- https://git.io/vQgMr)"
+begin "gnome-tweaks/gogh/nerd-fonts/gnome terminal" "because what you're really after... is ~sway~"
+bash -c "$(wget -qO- https://git.io/vQgMr)" # 119 120 168 225 247 248 252 (Kanagawa, SpaceDust, Nord, Tokyo/Tomorrow Night) 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
 unzip FiraCode.zip -d FiraCode
 sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
 sudo cp FiraCode/* /usr/share/fonts/truetype/fira-code-nerd/
 sudo fc-cache -fv
-fc-list | grep "Fira Code"
-sudo apt install -y dconf-editor
-# do this to export from your current terminal profile
-# dconf dump /org/gnome/terminal/legacy/profiles:/ > gogh-tokyo-night.dconf
-dconf load /org/gnome/terminal/legacy/profiles:/ < gogh-tokyo-night.dconf
-finished "gogh/nerd-fonts"
+sudo apt-get install gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
+finished "~sway~"
 
 # Install Snap packages
 begin "snaps" "snap me up, bruh"
@@ -58,7 +54,7 @@ finished "snaps"
 # Install Google Chrome
 begin "chrome" "because of reasons"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt-get install -y ./google-chrome-stable_current_amd64.debecho
+sudo apt-get install -y ./google-chrome-stable_current_amd64.debecho chrome-gnome-shell
 finished "chrome"
 
 # Install Docker
