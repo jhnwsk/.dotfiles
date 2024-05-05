@@ -43,6 +43,7 @@ sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
 sudo cp FiraCode/* /usr/share/fonts/truetype/fira-code-nerd/
 sudo fc-cache -fv
 sudo apt-get install gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
+gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/firewatch-neon-tokyo.png"
 finished "~sway~"
 
 begin "snaps" "snap me up, bruh"
