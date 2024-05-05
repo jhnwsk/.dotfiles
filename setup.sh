@@ -44,7 +44,10 @@ sudo fc-cache -fv
 sudo apt-get install -y gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
 gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/firewatch-neon-tokyo.png"
 
-themes=("119 120 168 225 247 248 252") # Kanagawa, SpaceDust, Nord, Tokyo/Tomorrow Night
+# Tomorrow Night is absolute fire
+# but these are also very decent
+# themes=("119 120 168 225 247 248") # Kanagawa, SpaceDust, Nord, Tokyo Night
+themes=("252") # Tomorrow Night <3
 echo "$themes" | bash -c "$(wget -qO- https://git.io/vQgMr)"
 finished "~sway~"
 
