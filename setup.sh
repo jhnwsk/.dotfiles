@@ -17,7 +17,7 @@ finished() {
 begin "aptitude packages" "the fundaments of awesome"
 sudo apt-get update -y
 sudo apt-get upgrade -y
-sudo apt-get install -y zsh htop git curl tldr build-essential libssl-dev snapd
+sudo apt-get install -y zsh htop git curl tldr build-essential libssl-dev snapd direnv
 finished "aptitude packages"
 
 begin "zsh/antigen/starship" "command line sweet sauce"
@@ -47,8 +47,7 @@ gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/firewatch-
 # Tomorrow Night is absolute fire
 # but these are also very decent
 # themes=("119 120 168 225 247 248") # Kanagawa, SpaceDust, Nord, Tokyo Night
-themes=("252") # Tomorrow Night <3
-echo "$themes" | bash -c "$(wget -qO- https://git.io/vQgMr)"
+echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)" # Tomorrow Night <3
 finished "~sway~"
 
 begin "snaps" "snap me up, bruh"
@@ -69,7 +68,7 @@ sudo apt-get install -y ./google-chrome-stable_current_amd64.debecho chrome-gnom
 finished "chrome"
 
 begin "node/python" "because programming is fun, right?"
-sudo apt-get install -y python3-pip python3-venv python3-dev direnv gparted indicator-multiload kazam ncdu vim
+sudo apt-get install -y python3-pip python3-venv python3-dev gparted indicator-multiload kazam ncdu vim
 mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
