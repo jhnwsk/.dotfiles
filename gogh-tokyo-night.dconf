@@ -1,0 +1,36 @@
+[/]
+default='0629e45e-e332-4c69-9c31-13411f703d3c'
+list=['0629e45e-e332-4c69-9c31-13411f703d3c']
+
+[:0629e45e-e332-4c69-9c31-13411f703d3c]
+allow-bold=true
+background-color='#1a1a1b1b2626'
+background-transparency-percent=35
+bold-color='#c0c0cacaf5f5'
+bold-color-same-as-fg=true
+bold-is-bright=false
+cell-width-scale=1.0
+cursor-background-color='#c0c0cacaf5f5'
+cursor-colors-set=true
+cursor-foreground-color='#1a1a1b1b2626'
+font='FiraMono Nerd Font Mono Medium 12'
+foreground-color='#c0c0cacaf5f5'
+highlight-colors-set=false
+palette=['rgb(82,89,121)', 'rgb(247,118,142)', 'rgb(158,206,106)', 'rgb(224,175,104)', 'rgb(122,162,247)', 'rgb(187,154,247)', 'rgb(125,207,255)', 'rgb(169,177,214)', 'rgb(82,89,121)', 'rgb(247,118,142)', 'rgb(158,206,106)', 'rgb(224,175,104)', 'rgb(122,162,247)', 'rgb(187,154,247)', 'rgb(125,207,255)', 'rgb(192,202,245)']
+use-system-font=false
+use-theme-background=false
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=true
+visible-name='Tokyo Night'
+
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+background-transparency-percent=24
+cursor-shape='block'
+font='FiraMono Nerd Font 12'
+palette=['rgb(7,54,66)', 'rgb(220,50,47)', 'rgb(133,153,0)', 'rgb(181,137,0)', 'rgb(38,139,210)', 'rgb(211,54,130)', 'rgb(42,161,152)', 'rgb(238,232,213)', 'rgb(0,43,54)', 'rgb(203,75,22)', 'rgb(88,110,117)', 'rgb(101,123,131)', 'rgb(131,148,150)', 'rgb(108,113,196)', 'rgb(147,161,161)', 'rgb(253,246,227)']
+use-system-font=false
+use-theme-colors=true
+use-theme-transparency=false
+use-transparent-background=true
+visible-name='wasak'

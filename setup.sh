@@ -1,13 +1,13 @@
 #!/bin/bash
 
 echo "########################"
-echo "# apt packages"
+echo "# aptitude packages"
 echo "# the fundaments of awesome"
 echo "########################"
 
-sudo apt update
-sudo apt upgrade
-sudo apt install -y zsh htop git curl tldr build-essential libssl-dev snapd
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install -y zsh htop git curl tldr build-essential libssl-dev snapd
 
 echo "\n\n"
 
@@ -30,6 +30,11 @@ echo "# because what you're really after... is sway"
 echo "########################"
 
 bash -c  "$(wget -qO- https://git.io/vQgMr)" 
+sudo apt install -y fonts-nerd-fonts dconf-editor
+# we've dumped our dconf for gnome terminal profiles, right?
+# dconf dump /org/gnome/terminal/legacy/profiles:/ > gogh-tokyo-night.dconf
+dconf load /org/gnome/terminal/legacy/profiles:/ < gogh-tokyo-night.dconf
+
 
 echo "########################"
 echo "# snaps"
@@ -52,7 +57,7 @@ echo "# because of reasons"
 echo "########################"
 
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.debecho 
+sudo apt-get install -y ./google-chrome-stable_current_amd64.debecho 
 
 echo "########################"
 echo "# docker"
