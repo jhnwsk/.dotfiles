@@ -10,7 +10,7 @@ begin() {
 
 finished() {
     echo "┏-------------------------------------------------------"
-    echo "┃ Done with $1"
+    echo "┃ ...done with $1"
     echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
@@ -54,6 +54,7 @@ begin "snaps" "snap me up, bruh"
 sudo snap install code --classic
 sudo snap install spotify --classic
 sudo snap install slack --classic
+sudo snap install discord --classic
 sudo snap install 1password --classic
 sudo snap install flameshot --classic
 sudo snap install tradingview --classic
