@@ -42,7 +42,7 @@ sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
 sudo cp FiraCode/* /usr/share/fonts/truetype/fira-code-nerd/
 sudo fc-cache -fv
 sudo apt-get install -y gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
-gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/firewatch-neon-tokyo.png"
+gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/wallpapers/firewatch-neon-tokyo.png"
 
 # Tomorrow Night is absolute fire
 # but these are also very decent
@@ -65,7 +65,7 @@ finished "snaps"
 
 begin "chrome" "because of reasons"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt-get install -y ./google-chrome-stable_current_amd64.debecho chrome-gnome-shell
+sudo apt-get install -y ./google-chrome-stable_current_amd64.deb chrome-gnome-shell
 finished "chrome"
 
 begin "node/python" "because programming is fun, right?"
