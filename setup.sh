@@ -53,13 +53,14 @@ finished "~sway~"
 
 begin "snaps" "snap me up, bruh"
 sudo snap install code --classic
+sudo snap install spotify --classic
 sudo snap install slack --classic
+sudo snap install 1password --classic
+sudo snap install flameshot --classic
+sudo snap install tradingview --classic
 sudo snap install postman --classic
 sudo snap install gnome-boxes --classic
-sudo snap install 1password --classic
 sudo snap install gimp --classic
-sudo snap install spotify --classic
-sudo snap install flameshot --classic
 finished "snaps"
 
 begin "chrome" "because of reasons"
