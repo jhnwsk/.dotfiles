@@ -1,0 +1,7 @@
+/usr/local/lib
+├── aws-cdk@1.133.0
+├── corepack@0.10.0
+├── n@8.0.0
+├── npm-groovy-lint@11.1.1
+└── tldr@3.3.7
+

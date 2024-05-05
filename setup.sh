@@ -54,12 +54,21 @@ sudo snap install gnome-boxes --classic
 sudo snap install 1password --classic
 sudo snap install gimp --classic
 sudo snap install spotify --classic
+sudo snap install flameshot --classic
 finished "snaps"
 
 begin "chrome" "because of reasons"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt-get install -y ./google-chrome-stable_current_amd64.debecho chrome-gnome-shell
 finished "chrome"
+
+begin "node/python" "because programming is fun, right?"
+sudo apt-get install -y python3-pip python3-venv python3-dev direnv gparted indicator-multiload kazam ncdu vim
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+npm install --global < package-list.txt
+pip install -r requirements.txt
+finished "node/python"
 
 begin "docker" "'agua mala', the man said, 'you whore'"
 curl -fsSL https://get.docker.com -o get-docker.sh
