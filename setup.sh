@@ -30,18 +30,18 @@ cp .antigenrc ~/.antigenrc
 curl -sS https://starship.rs/install.sh | sh
 finished "zsh/antigen/starship"
 
-# Install Gogh and Nerd Fonts
-begin "gogh/nerd-fonts" "because what you're really after... is sway"
+begin "gogh/nerd-fonts/gnome terminal" "because what you're really after... is sway"
+bash -c "$(wget -qO- https://git.io/vQgMr)"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
 unzip FiraCode.zip -d FiraCode
 sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
 sudo cp FiraCode/* /usr/share/fonts/truetype/fira-code-nerd/
 sudo fc-cache -fv
 fc-list | grep "Fira Code"
-bash -c "$(wget -qO- https://git.io/vQgMr)"
 sudo apt install -y dconf-editor
-# Load GNOME Terminal profiles from file
-# dconf load /org/gnome/terminal/legacy/profiles:/ < gogh-tokyo-night.dconf
+# do this to export from your current terminal profile
+# dconf dump /org/gnome/terminal/legacy/profiles:/ > gogh-tokyo-night.dconf
+dconf load /org/gnome/terminal/legacy/profiles:/ < gogh-tokyo-night.dconf
 finished "gogh/nerd-fonts"
 
 # Install Snap packages
