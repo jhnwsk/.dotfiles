@@ -23,10 +23,10 @@ finished "aptitude packages"
 begin "zsh/antigen/starship" "command line sweet sauce"
 sudo usermod -s /usr/bin/zsh $(whoami)
 curl -L git.io/antigen > ~/.antigen.zsh
-ln -s .antigenrc ~/.antigenrc
-ln -s .direnvrc ~/.direnvrc
-ln -s .vimrc ~/.vimrc
-ln -s .zshrc ~/.zshrc
+ln -s "$(pwd)/.antigenrc" "$HOME/.antigenrc"
+ln -s "$(pwd)/.direnvrc" "$HOME/.direnvrc"
+ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
+ln -s "$(pwd)/.zshrc" "$HOME/.zshrc"
 curl -sS https://starship.rs/install.sh | sh
 starship preset gruvbox-rainbow -o ~/.config/starship.toml
 # if customizing the preset, do this instead
@@ -36,14 +36,18 @@ finished "zsh/antigen/starship"
 
 begin "gnome-tweaks/gogh/nerd-fonts/gnome terminal" "because what you're really after... is ~sway~"
 # still need to configure gnome terminal manually because export/import with dconf-editor is not working for some reason
-bash -c "$(wget -qO- https://git.io/vQgMr)" # 119 120 168 225 247 248 252 (Kanagawa, SpaceDust, Nord, Tokyo/Tomorrow Night) 
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
 unzip FiraCode.zip -d FiraCode
 sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
 sudo cp FiraCode/* /usr/share/fonts/truetype/fira-code-nerd/
 sudo fc-cache -fv
-sudo apt-get install gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
+sudo apt-get install -y gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
 gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/firewatch-neon-tokyo.png"
+
+themes=("119" "120" "168" "225" "247" "248" "252") # Kanagawa, SpaceDust, Nord, Tokyo/Tomorrow Night
+for theme in "${themes[@]}"; do
+    echo "$theme" | bash -c "$(wget -qO- https://git.io/vQgMr)"
+done
 finished "~sway~"
 
 begin "snaps" "snap me up, bruh"
@@ -66,7 +70,7 @@ begin "node/python" "because programming is fun, right?"
 sudo apt-get install -y python3-pip python3-venv python3-dev direnv gparted indicator-multiload kazam ncdu vim
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
-npm install --global < package-list.txt
+sudo xargs npm install --global < package-list.txt
 pip install -r requirements.txt
 finished "node/python"
 
