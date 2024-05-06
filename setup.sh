@@ -69,7 +69,7 @@ sudo apt-get install -y ./google-chrome-stable_current_amd64.deb chrome-gnome-sh
 finished "chrome"
 
 begin "node/python" "because programming is fun, right?"
-sudo apt-get install -y python3-pip python3-venv python3-dev gparted indicator-multiload kazam ncdu vim
+sudo apt-get install -y python3-pip python3-venv python3-dev gparted kazam ncdu vim
 mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
