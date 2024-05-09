@@ -27,28 +27,35 @@ ln -s "$(pwd)/.antigenrc" "$HOME/.antigenrc"
 ln -s "$(pwd)/.direnvrc" "$HOME/.direnvrc"
 ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
 ln -s "$(pwd)/.zshrc" "$HOME/.zshrc"
+ln -s .config/starship.toml ~/.config/starship.toml
+# based on gruvbox-rainbow <3
+# starship preset gruvbox-rainbow -o ~/.config/starship.toml
 curl -sS https://starship.rs/install.sh | sh
-starship preset gruvbox-rainbow -o ~/.config/starship.toml
-# if customizing the preset, do this instead
-# ln -s .config/starship.toml ~/.config/starship.toml
 chsh -s $(which zsh)
 finished "zsh/antigen/starship"
 
-begin "gnome-tweaks/gogh/nerd-fonts/gnome terminal" "because what you're really after... is ~sway~"
-# still need to configure gnome terminal manually because export/import with dconf-editor is not working for some reason
+begin "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is ~sway~"
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
 unzip FiraCode.zip -d FiraCode
 sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
 sudo cp FiraCode/* /usr/share/fonts/truetype/fira-code-nerd/
 sudo fc-cache -fv
 sudo apt-get install -y gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
-gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/wallpapers/firewatch-neon-tokyo.png"
 
 # Tomorrow Night is absolute fire
 # but these are also very decent
 # themes=("119 120 168 225 247 248") # Kanagawa, SpaceDust, Nord, Tokyo Night
 echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)" # Tomorrow Night <3
 finished "~sway~"
+
+begin "dconf" "some things never change"
+dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
+# this will load a thing you've exported before using
+# dconf dump / > dconf-where-from.ini
+# if this ain't working, and it never does, try these
+# gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/wallpapers/firewatch-neon-tokyo.png"
+# gsettings set org.gnome.desktop.calendar show-weekdate true
+finished "dconf"
 
 begin "snaps" "snap me up, bruh"
 sudo snap install code --classic
