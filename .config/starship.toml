@@ -27,9 +27,9 @@ $time\
 [ ](fg:color_bg1)\
 $line_break$character"""
 
-palette = 'gruvbox_dark'
+palette = 'tomorrow_night'
 
-[palettes.gruvbox_dark]
+[palettes.tomorrow_night]
 color_fg0 = '#fbf1c7'
 color_bg1 = '#3c3836'
 color_bg3 = '#665c54'
@@ -40,6 +40,13 @@ color_green = '#667032'
 color_aqua = '#476e6d'
 color_blue = '#3f5c6b'
 color_purple = '#6b4862'
+color_red_bright = '#bc6e6e'
+color_orange_bright = '#d89469'
+color_yellow_bright = '#ebb06b'
+color_green_bright = '#a2ac6e'
+color_aqua_bright = '#83aaa9'
+color_blue_bright = '#7b98a7'
+color_purple_bright = '#a7849e'
 
 [os]
 disabled = false
@@ -157,9 +164,9 @@ disabled = false
 
 [character]
 disabled = false
-success_symbol = '[](bold fg:color_green)'
-error_symbol = '[](bold fg:color_red)'
-vimcmd_symbol = '[](bold fg:color_green)'
-vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
-vimcmd_replace_symbol = '[](bold fg:color_purple)'
-vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+success_symbol = '[](bold fg:color_green_bright)'
+error_symbol = '[](bold fg:color_red_bright)'
+vimcmd_symbol = '[](bold fg:color_green_bright)'
+vimcmd_replace_one_symbol = '[](bold fg:color_purple_bright)'
+vimcmd_replace_symbol = '[](bold fg:color_purple_bright)'
+vimcmd_visual_symbol = '[](bold fg:color_yellow_bright)'
