@@ -43,7 +43,7 @@ if begin "zsh/antigen/starship" "command line sweet sauce"; then
     ln -s "$(pwd)/.direnvrc" "$HOME/.direnvrc"
     ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
     ln -s "$(pwd)/.zshrc" "$HOME/.zshrc"
-    ln -s .config/starship.toml ~/.config/starship.toml
+    ln -s "$(pwd)/.config/starship.toml" "$HOME/.config/starship.toml"
     # based on gruvbox-rainbow <3
     # starship preset gruvbox-rainbow -o ~/.config/starship.toml
     curl -sS https://starship.rs/install.sh | sh
@@ -69,14 +69,15 @@ fi
 if begin "snaps" "snap me up, bruh"; then
     sudo snap install code --classic
     sudo snap install spotify --classic
-    sudo snap install slack --classic
     sudo snap install discord --classic
     sudo snap install 1password --classic
-    sudo snap install flameshot --classic
     sudo snap install tradingview --classic
-    sudo snap install postman --classic
     sudo snap install gnome-boxes --classic
-    sudo snap install gimp --classic
+    # if for whatever sad reason you still/again have a day job, uncomment these
+    # sudo snap install slack --classic     
+    # sudo snap install flameshot --classic 
+    # sudo snap install postman --classic   
+    # sudo snap install gimp --classic      
     finished "snaps"
 fi
 
@@ -86,27 +87,33 @@ if begin "chrome" "because of reasons"; then
     finished "chrome"
 fi
 
-if begin "python and vim" "programming dead snakes"; then
+if begin "python, git and vim" "programming dead snakes"; then
     mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
     sudo apt-get install -y python3-pip python3-venv python3-dev gparted kazam ncdu vim
+    git config --global user.email "jhnwsk@gmail.com"
+    git config --global user.name "Jan Wąsak"
+    git config --global core.editor "vim"
     finished "python and vim"
 fi
 
-if begin "node/python" "a sword without a hilt, careful."; then
+if begin "node.js" "a sword without a hilt, careful."; then
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
     sudo apt-get install -y nodejs
     sudo xargs npm install --global < package-list.txt
-    finished "node/python/github"
+    finished "node.js"
 fi
 
 if begin "docker" "'agua mala', the man said, 'you whore'"; then
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
+    echo "don't forget to..."
+    echo "sudo groupadd docker; sudo usermod -aG docker $USER"
+    echo "...later"
     finished "docker"
 fi
 
 if begin "dconf" "some things never change, this rarely works"; then
-    dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
+    dconf load / < dconf/dconf-24.04.ini
     # this will load a thing you've exported before using
     # dconf dump / > dconf-where-from.ini
     # if this ain't working, and it never does, try these
@@ -115,7 +122,6 @@ if begin "dconf" "some things never change, this rarely works"; then
     finished "dconf"
 fi
 
-if begin "all done" "now it's time to..."; then
-    echo "sudo groupadd docker; sudo usermod -aG docker $USER"
+echo "all done... bye bye."
     finished "all done"
 fi
