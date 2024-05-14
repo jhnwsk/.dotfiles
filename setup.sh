@@ -70,10 +70,9 @@ if begin "snaps" "snap me up, bruh"; then
     sudo snap install code --classic
     sudo snap install spotify --classic
     sudo snap install discord --classic
-    sudo snap install 1password --classic
     sudo snap install tradingview --classic
-    sudo snap install gnome-boxes --classic
     # if for whatever sad reason you still/again have a day job, uncomment these
+    # sudo snap install gnome-boxes --classic
     # sudo snap install slack --classic     
     # sudo snap install flameshot --classic 
     # sudo snap install postman --classic   
