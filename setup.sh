@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ask_user() {
-    read -p "Let's do this thing? (Y/n): " choice
+    read -p "┃ ? (Y/n): " choice
     case "$choice" in
         n|N ) return 1;;
         * ) return 0;;
@@ -65,15 +65,6 @@ if begin "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is 
     finished "~sway~"
 fi
 
-if begin "dconf" "some things never change"; then
-    dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
-    # this will load a thing you've exported before using
-    # dconf dump / > dconf-where-from.ini
-    # if this ain't working, and it never does, try these
-    # gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/wallpapers/firewatch-neon-tokyo.png"
-    # gsettings set org.gnome.desktop.calendar show-weekdate true
-    finished "dconf"
-fi
 
 if begin "snaps" "snap me up, bruh"; then
     sudo snap install code --classic
@@ -95,13 +86,16 @@ if begin "chrome" "because of reasons"; then
     finished "chrome"
 fi
 
-if begin "node/python" "because programming is fun, right?"; then
-    sudo apt-get install -y python3-pip python3-venv python3-dev gparted kazam ncdu vim
+if begin "python and vim" "programming dead snakes"; then
     mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    sudo apt-get install -y python3-pip python3-venv python3-dev gparted kazam ncdu vim
+    finished "python and vim"
+fi
+
+if begin "node/python" "a sword without a hilt, careful."; then
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
     sudo apt-get install -y nodejs
     sudo xargs npm install --global < package-list.txt
-    pip install -r requirements.txt
     finished "node/python/github"
 fi
 
@@ -109,6 +103,16 @@ if begin "docker" "'agua mala', the man said, 'you whore'"; then
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
     finished "docker"
+fi
+
+if begin "dconf" "some things never change, this rarely works"; then
+    dconf load /org/gnome/terminal/legacy/profiles:/ < gnome-terminal-profiles.dconf
+    # this will load a thing you've exported before using
+    # dconf dump / > dconf-where-from.ini
+    # if this ain't working, and it never does, try these
+    # gsettings set org.gnome.desktop.background picture-uri "file://$(pwd)/wallpapers/firewatch-neon-tokyo.png"
+    # gsettings set org.gnome.desktop.calendar show-weekdate true
+    finished "dconf"
 fi
 
 if begin "all done" "now it's time to..."; then
