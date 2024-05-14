@@ -40,4 +40,7 @@ If you find this repository helpful, feel free to share the love. After all, sha
 ## Credits
 This project wouldn't be possible without the amazing open-source community and the countless hours spent on Stack Overflow. Kudos to all the wizards and sorceresses out there!
 
+## Handy Links
+- [How to customize GRUB](https://www.linuxtechmore.com/2024/05/how-to-customize-grub.html)
+
 ---

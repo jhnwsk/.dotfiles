@@ -112,6 +112,11 @@ if begin "docker" "'agua mala', the man said, 'you whore'"; then
     finished "docker"
 fi
 
+if begin "grub" "you're dual booting need not be fugly"; then
+    git clone git@github.com:vinceliuice/grub2-themes.git       
+    sudo ./grub2-themes/install.sh -s 4k
+fi
+
 if begin "dconf" "some things never change, this rarely works"; then
     dconf load / < dconf/dconf-24.04.ini
     # this will load a thing you've exported before using
