@@ -61,7 +61,7 @@ if begin "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is 
     # Tomorrow Night is absolute fire
     # but these are also very decent
     # themes=("119 120 168 225 247 248") # Kanagawa, SpaceDust, Nord, Tokyo Night
-    echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)" # Tomorrow Night <3
+    echo "253" | bash -c "$(wget -qO- https://git.io/vQgMr)" # Tomorrow Night <3
     finished "~sway~"
 fi
 
