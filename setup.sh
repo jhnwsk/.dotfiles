@@ -46,7 +46,7 @@ if begin "zsh/antigen/starship" "command line sweet sauce"; then
     ln -s "$(pwd)/.config/starship.toml" "$HOME/.config/starship.toml"
     # based on gruvbox-rainbow <3
     # starship preset gruvbox-rainbow -o ~/.config/starship.toml
-    curl -sS https://starship.rs/install.sh | sh
+    curl -sS https://starship.rs/install.sh | sh -s -- -y
     chsh -s $(which zsh)
     finished "zsh/antigen/starship"
 fi
