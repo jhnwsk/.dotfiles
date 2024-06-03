@@ -8,7 +8,7 @@ ask_user() {
     esac
 }
 
-begin() {
+begin_ask() {
     echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo "┃ $1"
     echo "┃ -----"
@@ -19,6 +19,16 @@ begin() {
         echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         return 1
     fi
+    echo "┗-------------------------------------------------------"
+    return 0
+}
+
+begin() {
+    echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "┃ $1"
+    echo "┃ -----"
+    echo "┃ $2"
+    echo "┃"
     echo "┗-------------------------------------------------------"
     return 0
 }
@@ -36,7 +46,7 @@ if begin "aptitude packages" "the fundaments of awesome"; then
     finished "aptitude packages"
 fi
 
-if begin "zsh/antigen/starship" "command line sweet sauce"; then
+if begin_ask "zsh/antigen/starship" "command line sweet sauce"; then
     sudo usermod -s /usr/bin/zsh $(whoami)
     curl -L git.io/antigen > ~/.antigen.zsh
     ln -s "$(pwd)/.antigenrc" "$HOME/.antigenrc"
@@ -51,7 +61,7 @@ if begin "zsh/antigen/starship" "command line sweet sauce"; then
     finished "zsh/antigen/starship"
 fi
 
-if begin "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is ~sway~"; then
+if begin_ask "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is ~sway~"; then
     wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
     unzip FiraCode.zip -d FiraCode
     sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
@@ -66,7 +76,7 @@ if begin "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is 
 fi
 
 
-if begin "snaps" "snap me up, bruh"; then
+if begin_ask "snaps" "snap me up, bruh"; then
     sudo snap install code --classic
     sudo snap install spotify --classic
     sudo snap install discord --classic
@@ -80,13 +90,13 @@ if begin "snaps" "snap me up, bruh"; then
     finished "snaps"
 fi
 
-if begin "chrome" "because of reasons"; then
+if begin_ask "chrome" "because of reasons"; then
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo apt-get install -y ./google-chrome-stable_current_amd64.deb chrome-gnome-shell
     finished "chrome"
 fi
 
-if begin "python, git and vim" "programming dead snakes"; then
+if begin_ask "python, git and vim" "programming dead snakes"; then
     mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
     sudo apt-get install -y python3-pip python3-venv python3-dev gparted kazam ncdu vim
     git config --global user.email "jhnwsk@gmail.com"
@@ -95,14 +105,14 @@ if begin "python, git and vim" "programming dead snakes"; then
     finished "python and vim"
 fi
 
-if begin "node.js" "a sword without a hilt, careful."; then
+if begin_ask "node.js" "a sword without a hilt, careful."; then
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
     sudo apt-get install -y nodejs
     sudo xargs npm install --global < package-list.txt
     finished "node.js"
 fi
 
-if begin "docker" "'agua mala', the man said, 'you whore'"; then
+if begin_ask "docker" "'agua mala', the man said, 'you whore'"; then
     curl -fsSL https://get.docker.com -o get-docker.sh
     sudo sh get-docker.sh
     echo "don't forget to..."
@@ -111,12 +121,12 @@ if begin "docker" "'agua mala', the man said, 'you whore'"; then
     finished "docker"
 fi
 
-if begin "grub" "you're dual booting need not be fugly"; then
+if begin_ask "grub" "you're dual booting need not be fugly"; then
     git clone git@github.com:vinceliuice/grub2-themes.git       
     sudo ./grub2-themes/install.sh -s 4k
 fi
 
-if begin "dconf" "some things never change, this rarely works"; then
+if begin_ask "dconf" "some things never change, this rarely works"; then
     dconf load / < dconf/dconf-24.04.ini
     # this will load a thing you've exported before using
     # dconf dump / > dconf-where-from.ini
@@ -126,6 +136,6 @@ if begin "dconf" "some things never change, this rarely works"; then
     finished "dconf"
 fi
 
-echo "all done... bye bye."
+if begin "all done... bye bye."
     finished "all done"
 fi
