@@ -43,5 +43,9 @@ This project wouldn't be possible without the amazing open-source community and 
 ## Handy Links
 - [How to customize GRUB](https://www.linuxtechmore.com/2024/05/how-to-customize-grub.html)
 - Too lazy to type passwords, but got a fingeprint sensor? `sudo pam-auth-update` for glory!
+- [Audacity](https://www.audacityteam.org/) for audio editing pleasure.
+- [vokoscreenNG](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) if gnome-screenshot is not enough
+- [OpenShot](https://www.openshot.org/) is iMovie but bet... a bit worse.
+- [Remmina](https://remmina.org/) is a great remote desktoper.
 
 ---
