@@ -47,5 +47,6 @@ This project wouldn't be possible without the amazing open-source community and 
 - [vokoscreenNG](https://linuxecke.volkoh.de/vokoscreen/vokoscreen.html) if gnome-screenshot is not enough
 - [OpenShot](https://www.openshot.org/) is iMovie but bet... a bit worse.
 - [Remmina](https://remmina.org/) is a great remote desktoper.
+- Install [nerdfonts](https://github.com/getnf/getnf) like a champ!
 
 ---

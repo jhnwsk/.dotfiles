@@ -19,3 +19,6 @@ setopt appendhistory
 
 # Created by wasak for 5.8
 eval "$(starship init zsh)"
+
+# LunarVim experiments
+export PATH="/home/john/.local/bin:$PATH"
