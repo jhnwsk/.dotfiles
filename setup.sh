@@ -1,48 +1,10 @@
 #!/bin/bash
-
-ask_user() {
-    read -p "┃ ? (Y/n): " choice
-    case "$choice" in
-        n|N ) return 1;;
-        * ) return 0;;
-    esac
-}
-
-begin_ask() {
-    echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "┃ $1"
-    echo "┃ -----"
-    echo "┃ $2"
-    echo "┃"
-    if ! ask_user; then
-        echo "┃ Skipping $1"
-        echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        return 1
-    fi
-    echo "┗-------------------------------------------------------"
-    return 0
-}
-
-begin() {
-    echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "┃ $1"
-    echo "┃ -----"
-    echo "┃ $2"
-    echo "┃"
-    echo "┗-------------------------------------------------------"
-    return 0
-}
-
-finished() {
-    echo "┏-------------------------------------------------------"
-    echo "┃ ...done with $1"
-    echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-}
+source ./setup_fns.sh
 
 if begin "aptitude packages" "the fundaments of awesome"; then
     sudo apt-get update -y
     sudo apt-get upgrade -y
-    sudo apt-get install -y zsh htop git curl tldr build-essential libssl-dev snapd direnv
+    sudo apt-get install -y zsh htop git curl tldr build-essential libssl-dev snapd direnv gparted ncdu
     finished "aptitude packages"
 fi
 
@@ -54,6 +16,7 @@ if begin_ask "zsh/antigen/starship" "command line sweet sauce"; then
     ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
     ln -s "$(pwd)/.zshrc" "$HOME/.zshrc"
     ln -s "$(pwd)/.config/starship.toml" "$HOME/.config/starship.toml"
+    ln -s "$(pwd)/.config/lvim" "$HOME/.config/lvim"
     # based on gruvbox-rainbow <3
     # starship preset gruvbox-rainbow -o ~/.config/starship.toml
     curl -sS https://starship.rs/install.sh | sh -s -- -y
@@ -62,19 +25,18 @@ if begin_ask "zsh/antigen/starship" "command line sweet sauce"; then
 fi
 
 if begin_ask "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is ~sway~"; then
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
-    unzip FiraCode.zip -d FiraCode
-    sudo mkdir -p /usr/share/fonts/truetype/fira-code-nerd
-    sudo cp FiraCode/* /usr/share/fonts/truetype/fira-code-nerd/
-    sudo fc-cache -fv
+    # getnf is boss
+    curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
+    getnf -i "FiraCode FiraMono"
+
     sudo apt-get install -y gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
+
     # Tomorrow Night is absolute fire
     # but these are also very decent
     # themes=("93 94 119 120 168 225 247 248") # Gruvbox Dark/Material Kanagawa, SpaceDust, Nord, Tokyo Night
     echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)" # Tomorrow Night <3
     finished "~sway~"
 fi
-
 
 if begin_ask "snaps" "snap me up, bruh"; then
     sudo snap install code --classic
@@ -96,13 +58,9 @@ if begin_ask "chrome" "because of reasons"; then
     finished "chrome"
 fi
 
-if begin_ask "python, git and vim" "programming dead snakes"; then
-    mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-    sudo apt-get install -y python3-pip python3-venv python3-dev gparted kazam ncdu vim
-    git config --global user.email "jhnwsk@gmail.com"
-    git config --global user.name "Jan Wąsak"
-    git config --global core.editor "vim"
-    finished "python and vim"
+if begin_ask "python" "dead snakes"; then
+    sudo apt-get install -y python3-pip python3-venv python3-dev
+    finished "dead snakes"
 fi
 
 if begin_ask "node.js" "a sword without a hilt, careful."; then
@@ -110,6 +68,23 @@ if begin_ask "node.js" "a sword without a hilt, careful."; then
     sudo apt-get install -y nodejs
     sudo xargs npm install --global < package-list.txt
     finished "node.js"
+fi
+
+if begin_ask "lunar vim and git configuration" "doing things the hard way"; then
+    sudo apt-get install -y vim neovim cargo ripgrep
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+    # LunarVim needs python for whatever reason
+    python3 -m venv .venv --system-site-packages
+    source .venv/bin/activate
+    LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh)
+    deactivate
+
+    git config --global user.email "jhnwsk@gmail.com"
+    git config --global user.name "Jan Wąsak"
+    git config --global core.editor "vim"
+
+    finished "doing things the hard way"
 fi
 
 if begin_ask "docker" "'agua mala', the man said, 'you whore'"; then
