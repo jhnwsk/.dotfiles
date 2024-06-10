@@ -21,4 +21,5 @@ setopt appendhistory
 eval "$(starship init zsh)"
 
 # it's where all kinds of cool stuff live
-export PATH="/home/john/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+

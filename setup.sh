@@ -111,6 +111,6 @@ if begin_ask "dconf" "some things never change, this rarely works"; then
     finished "dconf"
 fi
 
-if begin "all done... bye bye."
-    finished "all done"
-fi
+begin "all done... bye bye."
+finished "all done"
+
