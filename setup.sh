@@ -13,10 +13,8 @@ if begin_ask "zsh/antigen/starship" "command line sweet sauce"; then
     curl -L git.io/antigen > ~/.antigen.zsh
     ln -s "$(pwd)/.antigenrc" "$HOME/.antigenrc"
     ln -s "$(pwd)/.direnvrc" "$HOME/.direnvrc"
-    ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
     ln -s "$(pwd)/.zshrc" "$HOME/.zshrc"
     ln -s "$(pwd)/.config/starship.toml" "$HOME/.config/starship.toml"
-    ln -s "$(pwd)/.config/lvim" "$HOME/.config/lvim"
     # based on gruvbox-rainbow <3
     # starship preset gruvbox-rainbow -o ~/.config/starship.toml
     curl -sS https://starship.rs/install.sh | sh -s -- -y
@@ -70,16 +68,21 @@ if begin_ask "node.js" "a sword without a hilt, careful."; then
     finished "node.js"
 fi
 
-if begin_ask "lunar vim and git configuration" "doing things the hard way"; then
+if begin_ask "(astro)vim and git configuration" "doing things the hard way"; then
+    ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
     sudo apt-get install -y vim neovim cargo ripgrep
     mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-    # LunarVim needs python for whatever reason
-    python3 -m venv .venv --system-site-packages
-    source .venv/bin/activate
-    LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh)
-    deactivate
+    #AstroVim
+    mv ~/.local/share/nvim ~/.local/share/nvim.bak
+    mv ~/.local/state/nvim ~/.local/state/nvim.bak
+    mv ~/.cache/nvim ~/.cache/nvim.bak
+    ln -s "$(pwd)/.config/nvim" "$HOME/.config/.vimrc"
+    # already got ours but this is where the template lives
+    # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
+    rm -rf ~/.config/nvim/.git
 
+    # git (gud)
     git config --global user.email "jhnwsk@gmail.com"
     git config --global user.name "Jan Wąsak"
     git config --global core.editor "vim"
