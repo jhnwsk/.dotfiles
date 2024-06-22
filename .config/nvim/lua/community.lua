@@ -9,6 +9,5 @@ return {
   { import = "astrocommunity.colorscheme.catppuccin" },
   { import = "astrocommunity.editing-support.auto-save-nvim" },
   { import = "astrocommunity.note-taking.neorg" },
-  { import = "astrocommunity.fuzzy-finder.fzf-lua" },
   -- import/override with your plugins folder
 }
