@@ -77,10 +77,10 @@ if begin_ask "(astro)vim and git configuration" "doing things the hard way"; the
     mv ~/.local/share/nvim ~/.local/share/nvim.bak
     mv ~/.local/state/nvim ~/.local/state/nvim.bak
     mv ~/.cache/nvim ~/.cache/nvim.bak
-    ln -s "$(pwd)/.config/nvim" "$HOME/.config/.vimrc"
+    ln -s "$(pwd)/.config/nvim" "$HOME/.config/nvim"
     # already got ours but this is where the template lives
     # git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim
-    rm -rf ~/.config/nvim/.git
+    # rm -rf ~/.config/nvim/.git
 
     # git (gud)
     git config --global user.email "jhnwsk@gmail.com"
