@@ -29,7 +29,7 @@ function run_starship {
 }
 
 GNOME="gnome"; SECTIONS+=("$GNOME")
-function run_gnome{
+function run_gnome {
     begin "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is ~sway~"
     curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
     getnf -i "FiraCode FiraMono"
