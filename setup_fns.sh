@@ -23,18 +23,3 @@ finished() {
     echo "┃ ...done with $1"
     echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
-
-function show_help {
-    echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "┃ Usage: setup.sh [section ...]"
-    echo "┃"
-    echo "┃ Options:"
-    echo "┃   --help     Show this help message"
-    echo "┃"
-    echo "┃ Sections:"
-    echo "┃"
-    for i in "${!SECTIONS[@]}"; do
-        echo "┃ $((i+1)). ${SECTIONS[i]}"
-    done
-    echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-}

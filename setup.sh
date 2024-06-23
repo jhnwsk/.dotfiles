@@ -119,12 +119,6 @@ function run_all_done {
     finished "all done"
 }
 
-
-if [[ "$1" == "--help" ]]; then
-    show_help
-    exit 0
-fi
-
 if [ "$#" -eq 0 ]; then
     echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo "┃ Available sections:"
