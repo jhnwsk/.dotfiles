@@ -8,21 +8,6 @@ ask_user() {
     esac
 }
 
-begin_ask() {
-    echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "┃ $1"
-    echo "┃ -----"
-    echo "┃ $2"
-    echo "┃"
-    if ! ask_user; then
-        echo "┃ Skipping $1"
-        echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        return 1
-    fi
-    echo "┗-------------------------------------------------------"
-    return 0
-}
-
 begin() {
     echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo "┃ $1"
@@ -39,3 +24,17 @@ finished() {
     echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 }
 
+function show_help {
+    echo "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "┃ Usage: setup.sh [section ...]"
+    echo "┃"
+    echo "┃ Options:"
+    echo "┃   --help     Show this help message"
+    echo "┃"
+    echo "┃ Sections:"
+    echo "┃"
+    for i in "${!SECTIONS[@]}"; do
+        echo "┃ $((i+1)). ${SECTIONS[i]}"
+    done
+    echo "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+}
