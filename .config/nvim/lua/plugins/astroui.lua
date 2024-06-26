@@ -3,9 +3,9 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
-require("catppuccin").setup {
-  no_italic = true, -- Force no italic
-}
+-- require("catppuccin").setup {
+--   no_italic = true, -- Force no italic
+-- }
 
 ---@type LazySpec
 return {
@@ -13,7 +13,7 @@ return {
   ---@type AstroUIOpts
   opts = {
     -- change colorscheme
-    colorscheme = "catppuccin",
+    colorscheme = "nordic",
     no_italic = true,
     -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
     highlights = {
