@@ -3,29 +3,6 @@
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
 
-require("catppuccin").setup {
-  no_italic = true, -- Force no italic
-}
-
-require("kanagawa").setup {
-  undercurl = true, -- enable undercurls
-  commentStyle = { italic = true },
-  keywordStyle = { italic = false },
-  statementStyle = { bold = false },
-  typeStyle = {},
-  transparent = false, -- do not set background color
-  dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-  terminalColors = true, -- define vim.g.terminal_color_{0,17}
-  overrides = function(colors)
-    return {
-      -- Operator = { fg = colors.theme.syn.keyword, bold = false },
-      ["@variable.builtin"] = { fg = colors.theme.syn.special2, italic = false },
-      ["@keyword.operator"] = { fg = colors.palette.surimiOrange, bold = false },
-      ["@string.escape"] = { fg = colors.theme.syn.regex, bold = false },
-    }
-  end,
-}
-
 ---@type LazySpec
 return {
   "AstroNvim/astroui",
