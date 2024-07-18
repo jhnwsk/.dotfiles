@@ -44,7 +44,7 @@ return {
     import = "astrocommunity.editing-support.auto-save-nvim",
     config = function()
       require("auto-save").setup {
-        debounce_delay = 1350000000, -- delay before auto-saving
+        debounce_delay = 3000, -- delay before auto-saving, 3 seconds?
       }
     end,
   },
