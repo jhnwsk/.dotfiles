@@ -4,6 +4,63 @@
 ---@type LazySpec
 return {
   {
+    "rebelot/kanagawa.nvim",
+    config = function()
+      require("kanagawa").setup {
+        undercurl = true, -- enable undercurls
+        commentStyle = { italic = false },
+        keywordStyle = { italic = false },
+        statementStyle = { italic = false, bold = false },
+        typeStyle = {},
+        transparent = false, -- do not set background color
+        dimInactive = false, -- dim inactive window `:h hl-NormalNC`
+        terminalColors = true, -- define vim.g.terminal_color_{0,17}
+        overrides = function(colors)
+          return {
+            ["@variable.builtin"] = { fg = colors.theme.syn.special2, italic = false },
+            ["@keyword.operator"] = { fg = colors.palette.surimiOrange, bold = false },
+            ["@string.escape"] = { fg = colors.theme.syn.regex, bold = false },
+          }
+        end,
+      }
+    end,
+  },
+  {
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup {
+        debounce_delay = 3000, -- delay before auto-saving, 3 seconds?
+      }
+    end,
+    event = { "User AstroFile", "InsertEnter" },
+    opts = {
+      callbacks = {
+        before_saving = function()
+          -- save global autoformat status
+          vim.g.OLD_AUTOFORMAT = vim.g.autoformat_enabled
+
+          vim.g.autoformat_enabled = false
+          vim.g.OLD_AUTOFORMAT_BUFFERS = {}
+          -- disable all manually enabled buffers
+          for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.b[bufnr].autoformat_enabled then
+              table.insert(vim.g.OLD_BUFFER_AUTOFORMATS, bufnr)
+              vim.b[bufnr].autoformat_enabled = false
+            end
+          end
+        end,
+        after_saving = function()
+          -- restore global autoformat status
+          vim.g.autoformat_enabled = vim.g.OLD_AUTOFORMAT
+          -- reenable all manually enabled buffers
+          for _, bufnr in ipairs(vim.g.OLD_AUTOFORMAT_BUFFERS or {}) do
+            vim.b[bufnr].autoformat_enabled = true
+          end
+        end,
+      },
+    },
+  },
+  {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     config = function()
@@ -37,30 +94,71 @@ return {
       "nvim-telescope/telescope.nvim",
     },
   },
-  -- parrot looks cool but does not work out of the box
-  -- {
-  --   "frankroeder/parrot.nvim",
-  --   tag = "v0.3.2",
-  --   dependencies = { "ibhagwan/fzf-lua", "nvim-lua/plenary.nvim" },
-  --   config = function()
-  --     require("parrot").setup {
-  --       providers = {
-  --         openai = {
-  --           api_key = os.getenv "OPENAI_API_KEY",
-  --         },
-  --       },
-  --     }
-  --   end,
-  -- },
+  {
+    "catppuccin/nvim",
+    config = function()
+      require("catppuccin").setup {
+        no_italic = true,
+      }
+    end,
+    name = "catppuccin",
+    ---@type CatppuccinOptions
+    opts = {
+      integrations = {
+        aerial = true,
+        alpha = true,
+        cmp = true,
+        dap = true,
+        dap_ui = true,
+        gitsigns = true,
+        illuminate = true,
+        indent_blankline = true,
+        markdown = true,
+        mason = true,
+        native_lsp = { enabled = true },
+        neotree = true,
+        notify = true,
+        semantic_tokens = true,
+        symbols_outline = true,
+        telescope = true,
+        treesitter = true,
+        ts_rainbow = false,
+        ufo = true,
+        which_key = true,
+        window_picker = true,
+      },
+    },
+    specs = {
+      {
+        "akinsho/bufferline.nvim",
+        optional = true,
+        opts = function(_, opts)
+          return require("astrocore").extend_tbl(opts, {
+            highlights = require("catppuccin.groups.integrations.bufferline").get(),
+          })
+        end,
+      },
+      {
+        "nvim-telescope/telescope.nvim",
+        optional = true,
+        opts = {
+          highlight = {
+            enable = true,
+            additional_vim_regex_highlighting = false,
+          },
+        },
+      },
+    },
+  },
 
   -- == Examples of Adding Plugins ==
 
-  "andweeb/presence.nvim",
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "BufRead",
-    config = function() require("lsp_signature").setup() end,
-  },
+  -- "andweeb/presence.nvim",
+  -- {
+  --   "ray-x/lsp_signature.nvim",
+  --   event = "BufRead",
+  --   config = function() require("lsp_signature").setup() end,
+  -- },
 
   -- == Examples of Overriding Plugins ==
 
