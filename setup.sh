@@ -41,7 +41,6 @@ function run_gnome {
 SNAPS="snaps"; SECTIONS+=("$SNAPS")
 function run_snaps {
     begin "snaps" "snap me up, bruh"
-    sudo snap install code --classic
     sudo snap install spotify --classic
     sudo snap install discord --classic
     sudo snap install tradingview --classic

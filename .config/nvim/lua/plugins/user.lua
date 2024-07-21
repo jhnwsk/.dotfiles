@@ -27,13 +27,10 @@ return {
   },
   {
     "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup {
-        debounce_delay = 3000, -- delay before auto-saving, 3 seconds?
-      }
-    end,
     event = { "User AstroFile", "InsertEnter" },
     opts = {
+      debounce_delay = 3000, -- delay before auto-saving, 3 seconds?
+      trigger_events = { "BufLeave" }, -- vim events that trigger auto-save. See :h events
       callbacks = {
         before_saving = function()
           -- save global autoformat status
