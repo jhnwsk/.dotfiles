@@ -108,6 +108,7 @@ function run_grub {
 DCONF="dconf"; SECTIONS+=("$DCONF")
 function run_dconf {
     begin "dconf" "some things never change, this rarely works"
+    # remember to dconf dump / > dconf/dconf-24.04.ini often
     dconf load / < dconf/dconf-24.04.ini
     finished "dconf"
 }
