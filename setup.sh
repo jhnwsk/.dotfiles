@@ -107,12 +107,6 @@ function run_docker {
     finished "docker"
 }
 
-GRUB="grub"; SECTIONS+=("$GRUB")
-function run_grub {
-    begin "grub" "you're dual booting need not be fugly"
-    git clone git@github.com:vinceliuice/grub2-themes.git
-    sudo ./grub2-themes/install.sh -s 4k
-}
 
 HARLEQUIN="harlequin"; SECTIONS+=("$HARLEQUIN")
 function run_harlequin {
