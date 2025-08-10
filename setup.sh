@@ -72,7 +72,7 @@ function run_nodejs {
 }
 
 ASTRO_VIM="astro_vim"; SECTIONS+=("$ASTRO_VIM")
-function run_astro_vim_and_git_configuration {
+function run_astro {
     begin "(astro)vim and git configuration" "doing things the hard way"
     ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
     sudo apt-get install -y vim neovim cargo ripgrep lua5.1 luarocks
