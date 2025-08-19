@@ -105,6 +105,15 @@ function run_grub {
     sudo ./grub2-themes/install.sh -s 4k
 }
 
+HARLEQUIN="harlequin"; SECTIONS+=("$HARLEQUIN")
+function run_harlequin {
+    begin "harlequin" "sql gui for the terminal"
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    source "$HOME/.cargo/env"
+    uv tool install 'harlequin[postgres,mysql,s3]'
+    finished "harlequin"
+}
+
 DCONF="dconf"; SECTIONS+=("$DCONF")
 function run_dconf {
     begin "dconf" "some things never change, this rarely works"
