@@ -5,6 +5,7 @@ get-docker.sh
 google-chrome-stable_current_amd64.deb
 .envrc
 .venv
+node_modules
 
 
 # Byte-compiled / optimized / DLL files

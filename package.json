@@ -1,0 +1,23 @@
+{
+  "name": "dotfiles",
+  "version": "1.0.0",
+  "description": "This is here just for the sake of Claude. For Claude's Sake!",
+  "main": "index.js",
+
+  "scripts": {
+    "claude": "npx @anthropic-ai/claude-code"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhnwsk/.dotfiles.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jhnwsk/.dotfiles/issues"
+  },
+  "homepage": "https://github.com/jhnwsk/.dotfiles#readme",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^1.0.84"
+  }
+}

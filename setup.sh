@@ -10,13 +10,19 @@ function run_aptitude {
     begin "$APT" "the fundaments of awesome"
     sudo apt-get update -y
     sudo apt-get upgrade -y
-    sudo apt-get install -y zsh htop git curl tldr build-essential libssl-dev snapd direnv gparted ncdu
+    # the must-haves
+    sudo apt-get install -y zsh htop git curl tldr direnv ncdu
+    # the nice-to-haves
+    sudo apt-get install -y build-essential libssl-dev snapd gparted
     finished "aptitude packages"
 }
 
 ZSH="starship"; SECTIONS+=("$ZSH")
 function run_starship {
-    begin "zsh/antigen/starship" "command line sweet sauce"
+    begin "zsh/antigen/starship/nerd-fonts/gogh" "because what you're really after... is ~sway~"
+    curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
+    getnf -i "FiraCode FiraMono"
+    echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)"
     sudo usermod -s /usr/bin/zsh $(whoami)
     curl -L git.io/antigen > ~/.antigen.zsh
     ln -s "$(pwd)/.antigenrc" "$HOME/.antigenrc"
@@ -30,11 +36,8 @@ function run_starship {
 
 GNOME="gnome"; SECTIONS+=("$GNOME")
 function run_gnome {
-    begin "gnome-tweaks/gogh/nerd-fonts" "because what you're really after... is ~sway~"
-    curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
-    getnf -i "FiraCode FiraMono"
+    begin "gnome-tweaks" "diggy diggy hole!"
     sudo apt-get install -y gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
-    echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)"
     finished "gnome-tweaks/gogh/nerd-fonts"
 }
 
@@ -65,14 +68,19 @@ function run_python {
 NODEJS="nodejs"; SECTIONS+=("$NODEJS")
 function run_nodejs {
     begin "node.js" "a sword without a hilt, careful."
-    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-    sudo apt-get install -y nodejs
-    sudo xargs npm install --global < package-list.txt
+    # Download and install fnm:
+    curl -o- https://fnm.vercel.app/install | bash
+    # Download and install Node.js:
+    fnm install 22
+    # Verify the Node.js version:
+    node -v # Should print "v22.19.0".
+    # Verify npm version:
+    npm -v # Should print "10.9.3".
     finished "node.js"
 }
 
 ASTRO_VIM="astro_vim"; SECTIONS+=("$ASTRO_VIM")
-function run_astro {
+function run_astro_vim {
     begin "(astro)vim and git configuration" "doing things the hard way"
     ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
     sudo apt-get install -y vim neovim cargo ripgrep lua5.1 luarocks
@@ -108,6 +116,7 @@ function run_grub {
 HARLEQUIN="harlequin"; SECTIONS+=("$HARLEQUIN")
 function run_harlequin {
     begin "harlequin" "sql gui for the terminal"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
     curl -LsSf https://astral.sh/uv/install.sh | sh
     source "$HOME/.cargo/env"
     uv tool install 'harlequin[postgres,mysql,s3]'
