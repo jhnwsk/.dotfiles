@@ -101,10 +101,9 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin-tomorrow",
-    priority = 1000,
-    config = function()
+    opts = function()
       -- Tomorrow Night color palette
-      local colors = {
+      local tomorrow_colors = {
         base = "#1D1F21",     -- background
         mantle = "#1D1F21",   -- slightly darker bg
         crust = "#1A1C1E",    -- darkest bg
@@ -134,10 +133,10 @@ return {
         rosewater = "#F5E0DC",
       }
 
-      require("catppuccin").setup({
+      return {
         flavor = "mocha",
         color_overrides = {
-          mocha = colors,
+          mocha = tomorrow_colors,
         },
         custom_highlights = function(c)
           return {
@@ -149,37 +148,27 @@ return {
             NormalNC = { bg = c.base, fg = c.text },
           }
         end,
-        integrations = {
-          aerial = true,
-          alpha = true,
-          cmp = true,
-          dap = true,
-          dap_ui = true,
-          gitsigns = true,
-          illuminate = true,
-          indent_blankline = true,
-          markdown = true,
-          mason = true,
-          native_lsp = { enabled = true },
-          neotree = true,
-          notify = true,
-          semantic_tokens = true,
-          symbols_outline = true,
-          telescope = true,
-          treesitter = true,
-          ts_rainbow = false,
-          ufo = true,
-          which_key = true,
-          window_picker = true,
-        },
-      })
-      
-      -- Create the custom colorscheme command
-      vim.api.nvim_create_user_command("ColorschemeTonight", function()
+      }
+    end,
+    config = function(_, opts)
+      -- Create a command to switch to catppuccin-tomorrow
+      vim.api.nvim_create_user_command("CatppuccinTomorrow", function()
+        require("catppuccin").setup(opts)
         vim.cmd.colorscheme("catppuccin")
-      end, { desc = "Load catppuccin with Tomorrow Night colors" })
+      end, { desc = "Switch to catppuccin with Tomorrow Night colors" })
+      
+      -- Auto-apply catppuccin-tomorrow after startup
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = function()
+          vim.schedule(function()
+            require("catppuccin").setup(opts)
+            vim.cmd.colorscheme("catppuccin")
+          end)
+        end,
+      })
     end,
   },
+
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
