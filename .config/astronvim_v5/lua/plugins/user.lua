@@ -97,6 +97,90 @@ return {
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
 
+  -- Custom catppuccin-tomorrow colorscheme
+  {
+    "catppuccin/nvim",
+    name = "catppuccin-tomorrow",
+    priority = 1000,
+    config = function()
+      -- Tomorrow Night color palette
+      local colors = {
+        base = "#1D1F21",     -- background
+        mantle = "#1D1F21",   -- slightly darker bg
+        crust = "#1A1C1E",    -- darkest bg
+        text = "#C5C8C6",     -- foreground
+        subtext1 = "#B4B7B4", -- slightly dimmed text
+        subtext0 = "#A3A6A3", -- more dimmed text
+        overlay2 = "#8C8F8C", -- overlay colors
+        overlay1 = "#6C6F6C",
+        overlay0 = "#4C4F4C",
+        surface2 = "#3C3F3C",
+        surface1 = "#2C2F2C",
+        surface0 = "#1D1F21",
+        -- Tomorrow Night accent colors
+        red = "#CC6666",
+        maroon = "#B85450",
+        peach = "#DE935F",
+        yellow = "#F0C674",
+        green = "#B5BD68",
+        teal = "#8ABEB7",
+        sky = "#7ABCF7",
+        sapphire = "#74C7EC",
+        blue = "#81A2BE",
+        lavender = "#B4BEFE",
+        mauve = "#B294BB",
+        pink = "#F5C2E7",
+        flamingo = "#F2CDCD",
+        rosewater = "#F5E0DC",
+      }
+
+      require("catppuccin").setup({
+        flavor = "mocha",
+        color_overrides = {
+          mocha = colors,
+        },
+        custom_highlights = function(c)
+          return {
+            Comment = { fg = c.overlay1, style = { "italic" } },
+            CursorLine = { bg = c.surface0 },
+            Visual = { bg = c.surface1 },
+            Folded = { bg = c.surface0, fg = c.overlay1 },
+            Normal = { bg = c.base, fg = c.text },
+            NormalNC = { bg = c.base, fg = c.text },
+          }
+        end,
+        integrations = {
+          aerial = true,
+          alpha = true,
+          cmp = true,
+          dap = true,
+          dap_ui = true,
+          gitsigns = true,
+          illuminate = true,
+          indent_blankline = true,
+          markdown = true,
+          mason = true,
+          native_lsp = { enabled = true },
+          neotree = true,
+          notify = true,
+          semantic_tokens = true,
+          symbols_outline = true,
+          telescope = true,
+          treesitter = true,
+          ts_rainbow = false,
+          ufo = true,
+          which_key = true,
+          window_picker = true,
+        },
+      })
+      
+      -- Create the custom colorscheme command
+      vim.api.nvim_create_user_command("ColorschemeTonight", function()
+        vim.cmd.colorscheme("catppuccin")
+      end, { desc = "Load catppuccin with Tomorrow Night colors" })
+    end,
+  },
+
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
     "L3MON4D3/LuaSnip",
