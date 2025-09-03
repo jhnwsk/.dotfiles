@@ -97,76 +97,23 @@ return {
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
 
-  -- Custom catppuccin-tomorrow colorscheme
+  -- Override catppuccin with Tomorrow Night colors  
   {
     "catppuccin/nvim",
-    name = "catppuccin-tomorrow",
-    opts = function()
-      -- Tomorrow Night color palette
-      local tomorrow_colors = {
-        base = "#1D1F21",     -- background
-        mantle = "#1D1F21",   -- slightly darker bg
-        crust = "#1A1C1E",    -- darkest bg
-        text = "#C5C8C6",     -- foreground
-        subtext1 = "#B4B7B4", -- slightly dimmed text
-        subtext0 = "#A3A6A3", -- more dimmed text
-        overlay2 = "#8C8F8C", -- overlay colors
-        overlay1 = "#6C6F6C",
-        overlay0 = "#4C4F4C",
-        surface2 = "#3C3F3C",
-        surface1 = "#2C2F2C",
-        surface0 = "#1D1F21",
-        -- Tomorrow Night accent colors
-        red = "#CC6666",
-        maroon = "#B85450",
-        peach = "#DE935F",
-        yellow = "#F0C674",
-        green = "#B5BD68",
-        teal = "#8ABEB7",
-        sky = "#7ABCF7",
-        sapphire = "#74C7EC",
-        blue = "#81A2BE",
-        lavender = "#B4BEFE",
-        mauve = "#B294BB",
-        pink = "#F5C2E7",
-        flamingo = "#F2CDCD",
-        rosewater = "#F5E0DC",
-      }
-
-      return {
-        flavor = "mocha",
-        color_overrides = {
-          mocha = tomorrow_colors,
+    opts = {
+      flavor = "mocha",
+      color_overrides = {
+        mocha = {
+          base = "#1D1F21", text = "#C5C8C6", red = "#CC6666", peach = "#DE935F",
+          yellow = "#F0C674", green = "#B5BD68", teal = "#8ABEB7", blue = "#81A2BE",
+          mauve = "#B294BB", mantle = "#1D1F21", crust = "#1A1C1E", subtext1 = "#B4B7B4",
+          subtext0 = "#A3A6A3", overlay2 = "#8C8F8C", overlay1 = "#6C6F6C", overlay0 = "#4C4F4C",
+          surface2 = "#3C3F3C", surface1 = "#2C2F2C", surface0 = "#1D1F21", maroon = "#B85450",
+          sky = "#7ABCF7", sapphire = "#74C7EC", lavender = "#B4BEFE", pink = "#F5C2E7",
+          flamingo = "#F2CDCD", rosewater = "#F5E0DC",
         },
-        custom_highlights = function(c)
-          return {
-            Comment = { fg = c.overlay1, style = { "italic" } },
-            CursorLine = { bg = c.surface0 },
-            Visual = { bg = c.surface1 },
-            Folded = { bg = c.surface0, fg = c.overlay1 },
-            Normal = { bg = c.base, fg = c.text },
-            NormalNC = { bg = c.base, fg = c.text },
-          }
-        end,
-      }
-    end,
-    config = function(_, opts)
-      -- Create a command to switch to catppuccin-tomorrow
-      vim.api.nvim_create_user_command("CatppuccinTomorrow", function()
-        require("catppuccin").setup(opts)
-        vim.cmd.colorscheme("catppuccin")
-      end, { desc = "Switch to catppuccin with Tomorrow Night colors" })
-      
-      -- Auto-apply catppuccin-tomorrow after startup
-      vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-          vim.schedule(function()
-            require("catppuccin").setup(opts)
-            vim.cmd.colorscheme("catppuccin")
-          end)
-        end,
-      })
-    end,
+      },
+    },
   },
 
 
