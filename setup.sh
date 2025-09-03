@@ -47,6 +47,7 @@ function run_snaps {
     sudo snap install spotify --classic
     sudo snap install discord --classic
     sudo snap install tradingview --classic
+    sudo snap install nvim --classic
     finished "snaps"
 }
 
@@ -83,12 +84,12 @@ ASTRO_VIM="astro_vim"; SECTIONS+=("$ASTRO_VIM")
 function run_astro_vim {
     begin "(astro)vim and git configuration" "doing things the hard way"
     ln -s "$(pwd)/.vimrc" "$HOME/.vimrc"
-    sudo apt-get install -y vim neovim cargo ripgrep lua5.1 luarocks
+    sudo apt-get install -y vim cargo ripgrep lua5.1 luarocks
     mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
     mv ~/.local/share/nvim ~/.local/share/nvim.bak
     mv ~/.local/state/nvim ~/.local/state/nvim.bak
     mv ~/.cache/nvim ~/.cache/nvim.bak
-    ln -s "$(pwd)/.config/nvim" "$HOME/.config/nvim"
+    ln -s "$(pwd)/.config/astronvim_v5" "$HOME/.config/nvim"
     git config --global user.email "jhnwsk@gmail.com"
     git config --global user.name "Jan Wąsak"
     git config --global core.editor "vim"
