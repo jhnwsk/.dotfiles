@@ -11,7 +11,7 @@ function run_aptitude {
     sudo apt-get update -y
     sudo apt-get upgrade -y
     # the must-haves
-    sudo apt-get install -y zsh htop git curl tldr direnv ncdu
+    sudo apt-get install -y zsh htop git curl tldr direnv ncdu xclip
     # the nice-to-haves
     sudo apt-get install -y build-essential libssl-dev snapd gparted
     finished "aptitude packages"
