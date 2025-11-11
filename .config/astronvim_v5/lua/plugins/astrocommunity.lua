@@ -5,6 +5,5 @@ return {
   { import = "astrocommunity.colorscheme.kanagawa-nvim" },
   { import = "astrocommunity.colorscheme.gruvbox-nvim" },
   { import = "astrocommunity.colorscheme.nordic-nvim" },
-  { import = "astrocommunity.note-taking.neorg" },
   { import = "astrocommunity.git.git-blame-nvim" },
 }
