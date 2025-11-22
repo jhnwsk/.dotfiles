@@ -9,12 +9,26 @@ vim.opt.clipboard = "unnamedplus"
 vim.g.clipboard = {
   name = 'xclip',
   copy = {
-    ['+'] = 'timeout 1s xclip -quiet -i -selection clipboard',
-    ['*'] = 'timeout 1s xclip -quiet -i -selection primary',
+    ['+'] = 'timeout 5s xclip -quiet -i -selection clipboard 2>/dev/null',
+    ['*'] = 'timeout 5s xclip -quiet -i -selection primary 2>/dev/null',
   },
   paste = {
-    ['+'] = 'timeout 1s xclip -o -selection clipboard',
-    ['*'] = 'timeout 1s xclip -o -selection primary',
+    ['+'] = 'timeout 5s xclip -o -selection clipboard 2>/dev/null',
+    ['*'] = 'timeout 5s xclip -o -selection primary 2>/dev/null',
   },
   cache_enabled = 1,
 }
+
+-- Suppress LSP notifications to prevent "Press ENTER" prompts
+vim.lsp.handlers["$/progress"] = function() end
+vim.lsp.handlers["window/showMessage"] = function() end
+vim.lsp.handlers["window/logMessage"] = function(_, result, ctx)
+  -- Only show ERROR level logs (type 1), suppress WARN/INFO
+  if result.type == 1 then
+    vim.notify(result.message, vim.log.levels.ERROR)
+  end
+end
+
+-- Prevent hit-enter prompts from long messages
+vim.opt.shortmess:append("c")  -- Don't show completion messages
+vim.opt.shortmess:append("t")  -- Truncate messages to avoid prompts
