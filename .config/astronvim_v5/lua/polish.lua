@@ -9,14 +9,14 @@ vim.opt.clipboard = "unnamedplus"
 vim.g.clipboard = {
   name = 'xclip',
   copy = {
-    ['+'] = 'timeout 5s xclip -quiet -i -selection clipboard 2>/dev/null',
-    ['*'] = 'timeout 5s xclip -quiet -i -selection primary 2>/dev/null',
+    ['+'] = 'xclip -i -selection clipboard',
+    ['*'] = 'xclip -i -selection primary',
   },
   paste = {
     ['+'] = 'timeout 5s xclip -o -selection clipboard 2>/dev/null',
     ['*'] = 'timeout 5s xclip -o -selection primary 2>/dev/null',
   },
-  cache_enabled = 1,
+  cache_enabled = 0,
 }
 
 -- Suppress LSP notifications to prevent "Press ENTER" prompts

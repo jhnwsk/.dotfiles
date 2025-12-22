@@ -31,6 +31,7 @@ function run_starship {
     ln -s "$(pwd)/.config/starship.toml" "$HOME/.config/starship.toml"
     curl -sS https://starship.rs/install.sh | sh -s -- -y
     chsh -s $(which zsh)
+    ln -s "$(pwd)/.tmux.conf" "$HOME/.tmux.conf"
     finished "zsh/antigen/starship"
 }
 
@@ -49,7 +50,6 @@ function run_snaps {
     sudo snap install tradingview --classic
     sudo snap install nvim --classic
     sudo snap install tmux --classic
-    ln -s "$(pwd)/.tmux.conf" "$HOME/.tmux.conf"
     finished "snaps"
 }
 
