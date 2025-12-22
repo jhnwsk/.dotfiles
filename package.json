@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "This is here just for the sake of Claude. For Claude's Sake!",
   "main": "index.js",
-
   "scripts": {
-    "claude": "npx @anthropic-ai/claude-code"
+    "tclaude": "npx @anthropic-ai/claude-code"
   },
   "repository": {
     "type": "git",
