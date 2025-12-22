@@ -48,6 +48,7 @@ function run_snaps {
     sudo snap install discord --classic
     sudo snap install tradingview --classic
     sudo snap install nvim --classic
+    sudo snap install tmux --classic
     finished "snaps"
 }
 
