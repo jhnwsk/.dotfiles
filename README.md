@@ -1,9 +1,12 @@
+# .dotfiles
+
+![screenshot](screenshot.png)
+
+> zsh + starship + tmux + astronvim + tomorrow night
 
 ---
 
-# .dotfiles and Automated Setup Script 🚀
-
-Because you ain't got time for setting up a fresh system by yoself 🎩✨
+Because you ain't got time for setting up a fresh system by yoself
 
 ## What's This?
 
