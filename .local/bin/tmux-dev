@@ -1,0 +1,31 @@
+#!/bin/bash
+# tmux-dev: Start a dev layout (nvim left, vertical split right)
+# Usage: tmux-dev [session-name]
+
+SESSION="${1:-dev}"
+
+# If session exists, attach to it
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+    tmux attach -t "$SESSION"
+    exit 0
+fi
+
+# Create new session with nvim on the left (60%)
+tmux new-session -d -s "$SESSION" -c "$(pwd)"
+
+# Split right pane (40%)
+tmux split-window -h -p 40 -c "$(pwd)"
+
+# Split right pane vertically (top: claude, bottom: zsh)
+tmux split-window -v -c "$(pwd)"
+
+# Top right pane: claude --continue
+tmux select-pane -t 1
+tmux send-keys 'claude --continue' Enter
+
+# Select left pane and start nvim
+tmux select-pane -t 0
+tmux send-keys 'nvim .' Enter
+
+# Attach to session
+tmux attach -t "$SESSION"

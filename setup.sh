@@ -32,6 +32,8 @@ function run_starship {
     curl -sS https://starship.rs/install.sh | sh -s -- -y
     chsh -s $(which zsh)
     ln -s "$(pwd)/.tmux.conf" "$HOME/.tmux.conf"
+    mkdir -p "$HOME/.local/bin"
+    ln -s "$(pwd)/.local/bin/tmux-dev" "$HOME/.local/bin/tmux-dev"
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     # Install TPM plugins and copy custom Tomorrow Night theme
     ~/.tmux/plugins/tpm/bin/install_plugins
