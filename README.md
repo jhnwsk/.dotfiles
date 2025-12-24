@@ -27,7 +27,36 @@ cd ~/.dotfiles
 ./setup.sh
 ```
 
-And voilà! Sit back, relax, and watch the magic unfold as the script sprinkles fairy dust and sets up your Linux environment just the way you like it. ✨✨
+This launches an interactive menu where you can select which components to install.
+
+#### Setup Options
+
+| Command | Description |
+|---------|-------------|
+| `./setup.sh` | Interactive menu - select what you want |
+| `./setup.sh --all` | Install everything, no prompts |
+| `./setup.sh 1 3 5` | Install specific sections by number |
+
+#### Available Sections
+
+| # | Section | Description |
+|---|---------|-------------|
+| 1 | base | Core packages (zsh, htop, git, curl, etc.) |
+| 2 | git | Git config (name, email, editor) |
+| 3 | shell | Zsh + Antigen + Starship + Nerd Fonts |
+| 4 | tmux | Terminal multiplexer + TPM |
+| 5 | nvim | Neovim + AstroNvim |
+| 6 | vim | Vim + Pathogen |
+| 7 | rust | Rustup |
+| 8 | python | Python3 + pip + venv |
+| 9 | nodejs | fnm + Node.js |
+| 10 | docker | Docker engine |
+| 11 | harlequin | TUI database client |
+| 12 | gnome | GNOME tweaks + saved dconf settings |
+| 13 | chrome | Google Chrome |
+| 14 | apps | Discord, Signal, TradingView, Tidal |
+
+The script is idempotent - safe to run multiple times on the same system.
 
 ## But Wait, There's More!
 
