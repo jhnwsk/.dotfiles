@@ -32,6 +32,17 @@
 | `prefix + {` / `}` | Swap pane left/right |
 | `prefix + space` | Cycle layouts |
 
+## Mouse
+
+Mouse mode is enabled. Scroll normally to scroll the terminal buffer.
+
+| Action | How |
+|--------|-----|
+| Scroll | Just scroll |
+| Select/copy text | Hold `Shift` + select with mouse |
+| Enter copy mode | `prefix + [` |
+| Exit copy mode | `q` |
+
 ## Other
 
 | Key | Action |
