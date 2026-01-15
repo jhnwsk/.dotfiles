@@ -220,8 +220,7 @@ function run_hyprland {
             echo "Hyprland tools not configured for $DISTRO"
             ;;
     esac
-    # TODO: Add config symlinks when hypr configs are added to dotfiles
-    # ln -sf "$(pwd)/.config/hypr" "$HOME/.config/hypr"
+    ln -sfn "$(pwd)/.config/hypr" "$HOME/.config/hypr"
     # ln -sf "$(pwd)/.config/waybar" "$HOME/.config/waybar"
     finished "hyprland"
 }
