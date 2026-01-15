@@ -34,3 +34,6 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 # rustlings <3
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# aliases
+alias td="tmux-dev"
