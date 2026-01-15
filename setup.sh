@@ -1,5 +1,11 @@
 #!/bin/bash
-source ./setup_fns.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/setup_fns.sh"
+source "$SCRIPT_DIR/setup_distro.sh"
+source "$SCRIPT_DIR/setup_packages.sh"
+
+# Detect system configuration
+detect_distro
 
 # Create arrays to hold section names and descriptions
 SECTIONS=()
@@ -23,12 +29,16 @@ get_desc() {
 BASE="base"; SECTIONS+=("$BASE"); DESCRIPTIONS+=("the fundaments of awesome")
 function run_base {
     begin "$BASE" "$(get_desc $BASE)"
-    sudo apt-get update -y
-    sudo apt-get upgrade -y
+    pkg_update
+    pkg_upgrade
     # the must-haves
-    sudo apt-get install -y zsh htop git curl tldr direnv ncdu xclip
+    pkg_install zsh htop git curl tldr direnv ncdu xclip
     # the nice-to-haves
-    sudo apt-get install -y build-essential libssl-dev snapd flatpak gparted
+    pkg_install build_essential libssl flatpak gparted
+    # Snapd only on Ubuntu
+    if [ "$DISTRO" = "ubuntu" ]; then
+        sudo apt-get install -y snapd
+    fi
     # Enable flathub
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     finished "base packages"
@@ -50,12 +60,16 @@ function run_git {
 SHELL_SETUP="shell"; SECTIONS+=("$SHELL_SETUP"); DESCRIPTIONS+=("because what you're really after... is ~sway~")
 function run_shell {
     begin "$SHELL_SETUP" "$(get_desc $SHELL_SETUP)"
-    # Nerd fonts
+    # Nerd fonts (cross-platform)
     curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
     getnf -i "FiraCode FiraMono"
-    # Gogh terminal theme (Tomorrow Night #252)
-    echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)"
-    # Zsh + antigen + starship
+    # Gogh terminal theme - GNOME Terminal only
+    if [ "$DESKTOP_ENV" = "gnome" ]; then
+        echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)"
+    else
+        echo "Skipping Gogh (GNOME Terminal theme) - not running GNOME"
+    fi
+    # Zsh + antigen + starship (cross-platform)
     sudo usermod -s /usr/bin/zsh $(whoami)
     curl -L git.io/antigen > ~/.antigen.zsh
     ln -sf "$(pwd)/.antigenrc" "$HOME/.antigenrc"
@@ -65,13 +79,13 @@ function run_shell {
     ln -sf "$(pwd)/.config/starship.toml" "$HOME/.config/starship.toml"
     curl -sS https://starship.rs/install.sh | sh -s -- -y
     chsh -s $(which zsh)
-    finished "shell (zsh/antigen/starship/fonts/gogh)"
+    finished "shell (zsh/antigen/starship/fonts)"
 }
 
 TMUX="tmux"; SECTIONS+=("$TMUX"); DESCRIPTIONS+=("terminal multiplexer")
 function run_tmux {
     begin "$TMUX" "$(get_desc $TMUX)"
-    sudo snap install tmux --classic
+    snap_or_alt "tmux" "--classic" "tmux" "pacman"
     ln -sf "$(pwd)/.tmux.conf" "$HOME/.tmux.conf"
     mkdir -p "$HOME/.local/bin"
     ln -sf "$(pwd)/.local/bin/tmux-dev" "$HOME/.local/bin/tmux-dev"
@@ -90,8 +104,8 @@ function run_tmux {
 NVIM="nvim"; SECTIONS+=("$NVIM"); DESCRIPTIONS+=("the one true editor")
 function run_nvim {
     begin "$NVIM" "$(get_desc $NVIM)"
-    sudo snap install nvim --classic
-    sudo apt-get install -y cargo ripgrep lua5.1 luarocks
+    snap_or_alt "nvim" "--classic" "neovim" "pacman"
+    pkg_install cargo ripgrep lua luarocks
     # Backup existing nvim config
     mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null
     mv ~/.local/state/nvim ~/.local/state/nvim.bak 2>/dev/null
@@ -103,7 +117,7 @@ function run_nvim {
 VIM="vim"; SECTIONS+=("$VIM"); DESCRIPTIONS+=("the classic")
 function run_vim {
     begin "$VIM" "$(get_desc $VIM)"
-    sudo apt-get install -y vim
+    pkg_install vim
     ln -sf "$(pwd)/.vimrc" "$HOME/.vimrc"
     mkdir -p ~/.vim/autoload ~/.vim/bundle
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
@@ -124,7 +138,15 @@ function run_rust {
 PYTHON="python"; SECTIONS+=("$PYTHON"); DESCRIPTIONS+=("dead snakes")
 function run_python {
     begin "$PYTHON" "$(get_desc $PYTHON)"
-    sudo apt-get install -y python3-pip python3-venv python3-dev
+    case "$DISTRO" in
+        ubuntu)
+            sudo apt-get install -y python3-pip python3-venv python3-dev
+            ;;
+        arch)
+            # On Arch, python package includes pip and venv
+            sudo pacman -S --noconfirm --needed python python-pip
+            ;;
+    esac
     finished "python"
 }
 
@@ -165,28 +187,85 @@ function run_harlequin {
 GNOME="gnome"; SECTIONS+=("$GNOME"); DESCRIPTIONS+=("diggy diggy hole!")
 function run_gnome {
     begin "$GNOME" "$(get_desc $GNOME)"
-    sudo apt-get install -y gnome-system-tools dconf-editor gnome-tweaks gnome-shell-extensions
+    if [ "$DESKTOP_ENV" != "gnome" ]; then
+        echo "Skipping GNOME section - not running GNOME desktop"
+        echo "Detected desktop: $DESKTOP_ENV"
+        finished "gnome (skipped)"
+        return 0
+    fi
+    pkg_install dconf_editor gnome_tweaks gnome_extensions
+    # gnome-system-tools only on Ubuntu
+    if [ "$DISTRO" = "ubuntu" ]; then
+        sudo apt-get install -y gnome-system-tools
+    fi
     # Load saved dconf settings
     dconf load / < dconf/dconf-24.04.ini
     finished "gnome"
 }
 
+HYPRLAND="hyprland"; SECTIONS+=("$HYPRLAND"); DESCRIPTIONS+=("the wayland way")
+function run_hyprland {
+    begin "$HYPRLAND" "$(get_desc $HYPRLAND)"
+    if [ "$DESKTOP_ENV" != "hyprland" ]; then
+        echo "Skipping Hyprland section - not running Hyprland"
+        echo "Detected desktop: $DESKTOP_ENV"
+        finished "hyprland (skipped)"
+        return 0
+    fi
+    case "$DISTRO" in
+        arch)
+            pkg_install waybar wofi dunst swww wl_clipboard grim slurp
+            ;;
+        *)
+            echo "Hyprland tools not configured for $DISTRO"
+            ;;
+    esac
+    # TODO: Add config symlinks when hypr configs are added to dotfiles
+    # ln -sf "$(pwd)/.config/hypr" "$HOME/.config/hypr"
+    # ln -sf "$(pwd)/.config/waybar" "$HOME/.config/waybar"
+    finished "hyprland"
+}
+
 CHROME="chrome"; SECTIONS+=("$CHROME"); DESCRIPTIONS+=("because of reasons")
 function run_chrome {
     begin "$CHROME" "$(get_desc $CHROME)"
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo apt-get install -y ./google-chrome-stable_current_amd64.deb chrome-gnome-shell
+    case "$DISTRO" in
+        ubuntu)
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+            rm -f google-chrome-stable_current_amd64.deb
+            if [ "$DESKTOP_ENV" = "gnome" ]; then
+                sudo apt-get install -y chrome-gnome-shell
+            fi
+            ;;
+        arch)
+            aur_install google-chrome
+            if [ "$DESKTOP_ENV" = "gnome" ]; then
+                pkg_install chrome_gnome_shell
+            fi
+            ;;
+    esac
     finished "chrome"
 }
 
 APPS="apps"; SECTIONS+=("$APPS"); DESCRIPTIONS+=("appppppppppps!")
 function run_apps {
     begin "$APPS" "$(get_desc $APPS)"
-    # Snaps
-    sudo snap install discord --classic
-    sudo snap install signal-desktop
-    sudo snap install tradingview --classic
-    # Flatpaks
+    # Discord
+    snap_or_alt "discord" "--classic" "discord" "pacman"
+    # Signal
+    snap_or_alt "signal-desktop" "" "signal-desktop" "pacman"
+    # TradingView - snap on Ubuntu, flatpak on Arch
+    case "$DISTRO" in
+        ubuntu)
+            sudo snap install tradingview --classic
+            ;;
+        arch)
+            flatpak install -y flathub com.tradingview.tradingview || \
+                echo "TradingView: Use web version or install manually from AUR"
+            ;;
+    esac
+    # Tidal (flatpak on both)
     flatpak install -y flathub com.mastermindzh.tidal-hifi
     finished "apps"
 }
