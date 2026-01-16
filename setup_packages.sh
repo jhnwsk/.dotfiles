@@ -25,7 +25,7 @@ PKG_UBUNTU[wget]="wget"
 PKG_ARCH[wget]="wget"
 
 PKG_UBUNTU[tldr]="tldr"
-PKG_ARCH[tldr]="tldr"
+PKG_ARCH[tldr]="tealdeer"
 
 PKG_UBUNTU[direnv]="direnv"
 PKG_ARCH[direnv]="direnv"
