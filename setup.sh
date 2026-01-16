@@ -184,14 +184,27 @@ function run_harlequin {
 # DESKTOP & APPS
 # =============================================================================
 
-GRUB="grub"; SECTIONS+=("$GRUB"); DESCRIPTIONS+=("tela bootloader theme")
+GRUB="grub"; SECTIONS+=("$GRUB"); DESCRIPTIONS+=("tela bootloader theme + os-prober")
 function run_grub {
     begin "$GRUB" "$(get_desc $GRUB)"
+    # Install Tela theme
     local tmp_dir=$(mktemp -d)
     git clone --depth 1 https://github.com/vinceliuice/grub2-themes.git "$tmp_dir"
     sudo "$tmp_dir/install.sh" -t tela
     rm -rf "$tmp_dir"
-    finished "grub (tela theme)"
+    # Install and run os-prober to detect other OSes
+    pkg_install os_prober
+    sudo os-prober
+    # Regenerate GRUB config
+    case "$DISTRO" in
+        ubuntu)
+            sudo update-grub
+            ;;
+        arch)
+            sudo grub-mkconfig -o /boot/grub/grub.cfg
+            ;;
+    esac
+    finished "grub (tela theme + os-prober)"
 }
 
 GNOME="gnome"; SECTIONS+=("$GNOME"); DESCRIPTIONS+=("diggy diggy hole!")

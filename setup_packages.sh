@@ -56,6 +56,9 @@ PKG_ARCH[flatpak]="flatpak"
 PKG_UBUNTU[gparted]="gparted"
 PKG_ARCH[gparted]="gparted"
 
+PKG_UBUNTU[os_prober]="os-prober"
+PKG_ARCH[os_prober]="os-prober"
+
 # =============================================================================
 # EDITORS & TOOLS
 # =============================================================================
