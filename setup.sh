@@ -237,14 +237,17 @@ function run_hyprland {
     fi
     case "$DISTRO" in
         arch)
-            pkg_install waybar wofi dunst swww wl_clipboard grim slurp
+            pkg_install waybar wofi dunst swww wl_clipboard grim slurp wlogout brightnessctl
+            aur_install matugen-bin
             ;;
         *)
             echo "Hyprland tools not configured for $DISTRO"
             ;;
     esac
     ln -sfn "$(pwd)/.config/hypr" "$HOME/.config/hypr"
-    # ln -sf "$(pwd)/.config/waybar" "$HOME/.config/waybar"
+    ln -sfn "$(pwd)/.config/waybar" "$HOME/.config/waybar"
+    ln -sfn "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
+    ln -sfn "$(pwd)/.config/matugen" "$HOME/.config/matugen"
     finished "hyprland"
 }
 

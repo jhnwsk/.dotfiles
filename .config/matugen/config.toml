@@ -1,0 +1,22 @@
+# Matugen Configuration
+# Generate adaptive color schemes from wallpapers
+# Usage: matugen image <path-to-wallpaper>
+
+[config]
+# Color scheme type: "scheme-content", "scheme-expressive", "scheme-fidelity",
+# "scheme-fruit-salad", "scheme-monochrome", "scheme-neutral", "scheme-rainbow", "scheme-tonal-spot"
+scheme = "scheme-tonal-spot"
+
+# Contrast level: -1.0 to 1.0
+contrast = 0.0
+
+[templates.waybar-colors]
+input_path = "~/.config/matugen/templates/waybar-colors.css"
+output_path = "~/.config/waybar/colors.css"
+
+[templates.hyprland-colors]
+input_path = "~/.config/matugen/templates/hyprland-colors.conf"
+output_path = "~/.config/hypr/conf/colors.conf"
+
+[config.custom_colors]
+# You can define custom named colors here if needed

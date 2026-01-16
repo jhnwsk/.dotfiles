@@ -1,0 +1,134 @@
+/* Waybar Styles */
+
+@import "colors.css";
+
+* {
+    font-family: "FiraCode Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+window#waybar > box {
+    background: alpha(@background, 0.9);
+    border-radius: 12px;
+    border: 1px solid alpha(@primary, 0.3);
+}
+
+/* Workspaces */
+#workspaces {
+    margin-left: 8px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: @foreground;
+    background: transparent;
+    border-radius: 8px;
+    margin: 4px 2px;
+}
+
+#workspaces button:hover {
+    background: alpha(@primary, 0.2);
+}
+
+#workspaces button.active {
+    background: alpha(@primary, 0.4);
+    color: @foreground;
+}
+
+#workspaces button.urgent {
+    background: alpha(@error, 0.4);
+}
+
+/* Window title */
+#window {
+    color: @foreground;
+    padding: 0 12px;
+}
+
+/* Clock */
+#clock {
+    color: @foreground;
+    font-weight: bold;
+}
+
+/* Right modules */
+#cpu,
+#memory,
+#battery,
+#network,
+#pulseaudio,
+#tray {
+    padding: 0 10px;
+    margin: 4px 2px;
+    color: @foreground;
+    border-radius: 8px;
+}
+
+#cpu {
+    background: alpha(@secondary, 0.2);
+}
+
+#memory {
+    background: alpha(@accent, 0.2);
+}
+
+#battery {
+    background: alpha(@success, 0.2);
+}
+
+#battery.warning {
+    background: alpha(@warning, 0.3);
+}
+
+#battery.critical {
+    background: alpha(@error, 0.3);
+}
+
+#battery.charging {
+    background: alpha(@success, 0.3);
+}
+
+#network {
+    background: alpha(@primary, 0.2);
+}
+
+#network.disconnected {
+    background: alpha(@error, 0.2);
+}
+
+#pulseaudio {
+    background: alpha(@primary, 0.2);
+}
+
+#pulseaudio.muted {
+    background: alpha(@error, 0.2);
+}
+
+#tray {
+    margin-right: 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: alpha(@warning, 0.2);
+}
+
+/* Tooltip */
+tooltip {
+    background: @background;
+    border: 1px solid @primary;
+    border-radius: 8px;
+}
+
+tooltip label {
+    color: @foreground;
+}
