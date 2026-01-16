@@ -14,6 +14,16 @@ This repository contains all the secret sauces that make my Linux environment fe
 
 ## What's inside?
 
+```
+.dotfiles/
+├── .config/           # App configs (nvim, tmux, starship, hyprland, etc.)
+├── .local/bin/        # Custom scripts
+├── shell/             # Zsh config + aliases
+├── gnome/             # GNOME dconf settings backup
+├── grub/              # GRUB theme resources
+└── setup.sh           # Interactive installer
+```
+
 ## How to Use
 
 ### Step 1: Clone the Repository
@@ -52,9 +62,11 @@ This launches an interactive menu where you can select which components to insta
 | 9 | nodejs | fnm + Node.js |
 | 10 | docker | Docker engine |
 | 11 | harlequin | TUI database client |
-| 12 | gnome | GNOME tweaks + saved dconf settings |
-| 13 | chrome | Google Chrome |
-| 14 | apps | Discord, Signal, TradingView, Tidal |
+| 12 | grub | Tela bootloader theme + os-prober |
+| 13 | gnome | GNOME tweaks + saved dconf settings |
+| 14 | hyprland | Hyprland + hypridle + hyprlock |
+| 15 | chrome | Google Chrome |
+| 16 | apps | Discord, Signal, TradingView, Tidal |
 
 The script is idempotent - safe to run multiple times on the same system.
 
