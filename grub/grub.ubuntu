@@ -2,6 +2,13 @@
 GRUB_DEFAULT=saved
 GRUB_SAVEDEFAULT=true
 
+# TODO: Add these settings for rollback safety (like CachyOS):
+# - Install an LTS kernel: sudo apt install linux-image-generic-hwe-* or linux-generic-lts-*
+# - GRUB_DISABLE_SUBMENU=false  (show "Advanced options" with older kernels)
+# - GRUB_DISABLE_RECOVERY=false (keep recovery mode entries)
+# - Consider: GRUB_GFXPAYLOAD_LINUX=keep (use same resolution for kernel)
+# After changes: sudo update-grub
+
 # If you change this file, run 'update-grub' afterwards to update
 # /boot/grub/grub.cfg.
 # For full documentation of the options in this file, see:
