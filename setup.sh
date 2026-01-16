@@ -243,6 +243,8 @@ function run_hyprland {
     ln -sfn "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
     ln -sfn "$(pwd)/.config/matugen" "$HOME/.config/matugen"
     ln -sfn "$(pwd)/.config/kitty" "$HOME/.config/kitty"
+    ln -sfn "$(pwd)/.config/gtk-3.0" "$HOME/.config/gtk-3.0"
+    ln -sfn "$(pwd)/.config/gtk-4.0" "$HOME/.config/gtk-4.0"
     finished "hyprland"
 }
 
