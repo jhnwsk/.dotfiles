@@ -184,6 +184,16 @@ function run_harlequin {
 # DESKTOP & APPS
 # =============================================================================
 
+GRUB="grub"; SECTIONS+=("$GRUB"); DESCRIPTIONS+=("tela bootloader theme")
+function run_grub {
+    begin "$GRUB" "$(get_desc $GRUB)"
+    local tmp_dir=$(mktemp -d)
+    git clone --depth 1 https://github.com/vinceliuice/grub2-themes.git "$tmp_dir"
+    sudo "$tmp_dir/install.sh" -t tela
+    rm -rf "$tmp_dir"
+    finished "grub (tela theme)"
+}
+
 GNOME="gnome"; SECTIONS+=("$GNOME"); DESCRIPTIONS+=("diggy diggy hole!")
 function run_gnome {
     begin "$GNOME" "$(get_desc $GNOME)"
