@@ -1,0 +1,6 @@
+show=drun
+prompt=Search...
+allow_images=false
+columns=1
+width=600
+height=300

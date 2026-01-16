@@ -1,0 +1,101 @@
+/* Tomorrow Night Theme (matches kitty/starship) */
+
+@define-color background #1d2021;
+@define-color foreground #fbf1c7;
+@define-color black #3c3836;
+@define-color red #803232;
+@define-color red-bright #bc6e6e;
+@define-color green #667032;
+@define-color green-bright #a2ac6e;
+@define-color yellow #af742f;
+@define-color yellow-bright #ebb06b;
+@define-color blue #3f5c6b;
+@define-color blue-bright #7b98a7;
+@define-color magenta #6b4862;
+@define-color magenta-bright #a7849e;
+@define-color cyan #476e6d;
+@define-color cyan-bright #83aaa9;
+@define-color orange #9c582d;
+@define-color orange-bright #d89469;
+
+* {
+  font-family: 'FiraCode Nerd Font', monospace;
+  font-size: 14px;
+}
+
+/* Window */
+window {
+  margin: 0px;
+  padding: 10px;
+  border: 2px solid @blue-bright;
+  border-radius: 8px;
+  background-color: @background;
+}
+
+/* Inner Box */
+#inner-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: @background;
+}
+
+/* Outer Box */
+#outer-box {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  background-color: @background;
+}
+
+/* Scroll */
+#scroll {
+  margin: 0px;
+  padding: 10px;
+  border: none;
+  background-color: @background;
+}
+
+/* Input */
+#input {
+  margin: 5px 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 0.1em;
+  color: @foreground;
+  background-color: @background;
+}
+
+#input image {
+    border: none;
+    color: @yellow-bright;
+}
+
+/* Text */
+#text {
+  margin: 5px;
+  border: none;
+  color: @foreground;
+}
+
+#entry {
+  background-color: @background;
+}
+
+#entry arrow {
+  border: none;
+  color: @blue-bright;
+}
+
+/* Selected Entry */
+#entry:selected {
+  border: 0.11em solid @blue-bright;
+}
+
+#entry:selected #text {
+  color: @yellow-bright;
+}
+
+#entry:drop(active) {
+  background-color: @blue-bright!important;
+}
