@@ -18,5 +18,9 @@ output_path = "~/.config/waybar/colors.css"
 input_path = "~/.config/matugen/templates/hyprland-colors.conf"
 output_path = "~/.config/hypr/conf/colors.conf"
 
+[templates.hyprtoolkit]
+input_path = "~/.config/matugen/templates/hyprtoolkit.conf"
+output_path = "~/.config/hypr/hyprtoolkit.conf"
+
 [config.custom_colors]
 # You can define custom named colors here if needed
