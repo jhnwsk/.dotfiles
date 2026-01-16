@@ -17,9 +17,11 @@ GRUB_SAVEDEFAULT=true
 # GRUB_DEFAULT=0
 GRUB_TIMEOUT_STYLE=menu
 GRUB_TIMEOUT=5
-GRUB_DISTRIBUTOR="master-blaster"
+GRUB_DISTRIBUTOR=`( . /etc/os-release; echo ${NAME:-Ubuntu} ) 2>/dev/null || echo Ubuntu`
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 GRUB_CMDLINE_LINUX=""
+GRUB_GFXPAYLOAD_LINUX=keep
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
 
 # If your computer has multiple operating systems installed, then you
 # probably want to run os-prober. However, if your computer is a host
