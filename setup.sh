@@ -242,6 +242,7 @@ function run_hyprland {
     ln -sfn "$(pwd)/.config/waybar" "$HOME/.config/waybar"
     ln -sfn "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
     ln -sfn "$(pwd)/.config/matugen" "$HOME/.config/matugen"
+    ln -sfn "$(pwd)/.config/kitty" "$HOME/.config/kitty"
     finished "hyprland"
 }
 
