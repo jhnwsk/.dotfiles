@@ -2,13 +2,6 @@
 GRUB_DEFAULT=saved
 GRUB_SAVEDEFAULT=true
 
-# TODO: Add these settings for rollback safety (like CachyOS):
-# - Install an LTS kernel: sudo apt install linux-image-generic-hwe-* or linux-generic-lts-*
-# - GRUB_DISABLE_SUBMENU=false  (show "Advanced options" with older kernels)
-# - GRUB_DISABLE_RECOVERY=false (keep recovery mode entries)
-# - Consider: GRUB_GFXPAYLOAD_LINUX=keep (use same resolution for kernel)
-# After changes: sudo update-grub
-
 # If you change this file, run 'update-grub' afterwards to update
 # /boot/grub/grub.cfg.
 # For full documentation of the options in this file, see:
@@ -22,6 +15,8 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 GRUB_CMDLINE_LINUX=""
 GRUB_GFXPAYLOAD_LINUX=keep
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+GRUB_DISABLE_SUBMENU=false
+GRUB_DISABLE_RECOVERY=false
 
 # If your computer has multiple operating systems installed, then you
 # probably want to run os-prober. However, if your computer is a host
@@ -45,9 +40,6 @@ GRUB_GFXMODE=1920x1080,auto
 
 # Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to Linux
 #GRUB_DISABLE_LINUX_UUID=true
-
-# Uncomment to disable generation of recovery mode menu entries
-#GRUB_DISABLE_RECOVERY="true"
 
 # Uncomment to get a beep at grub start
 #GRUB_INIT_TUNE="480 440 1"
