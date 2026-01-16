@@ -207,15 +207,12 @@ function run_grub {
     finished "grub (tela theme + os-prober)"
 }
 
-GNOME="gnome"; SECTIONS+=("$GNOME"); DESCRIPTIONS+=("diggy diggy hole!")
+GNOME="gnome"
+if [ "$DESKTOP_ENV" = "gnome" ]; then
+    SECTIONS+=("$GNOME"); DESCRIPTIONS+=("diggy diggy hole!")
+fi
 function run_gnome {
     begin "$GNOME" "$(get_desc $GNOME)"
-    if [ "$DESKTOP_ENV" != "gnome" ]; then
-        echo "Skipping GNOME section - not running GNOME desktop"
-        echo "Detected desktop: $DESKTOP_ENV"
-        finished "gnome (skipped)"
-        return 0
-    fi
     pkg_install dconf_editor gnome_tweaks gnome_extensions
     # gnome-system-tools only on Ubuntu
     if [ "$DISTRO" = "ubuntu" ]; then
@@ -226,15 +223,12 @@ function run_gnome {
     finished "gnome"
 }
 
-HYPRLAND="hyprland"; SECTIONS+=("$HYPRLAND"); DESCRIPTIONS+=("the wayland way")
+HYPRLAND="hyprland"
+if [ "$DESKTOP_ENV" = "hyprland" ]; then
+    SECTIONS+=("$HYPRLAND"); DESCRIPTIONS+=("the wayland way")
+fi
 function run_hyprland {
     begin "$HYPRLAND" "$(get_desc $HYPRLAND)"
-    if [ "$DESKTOP_ENV" != "hyprland" ]; then
-        echo "Skipping Hyprland section - not running Hyprland"
-        echo "Detected desktop: $DESKTOP_ENV"
-        finished "hyprland (skipped)"
-        return 0
-    fi
     case "$DISTRO" in
         arch)
             pkg_install waybar wofi dunst swww wl_clipboard grim slurp wlogout brightnessctl
