@@ -5,16 +5,16 @@
 -- Enable clipboard integration
 vim.opt.clipboard = "unnamedplus"
 
--- Manual clipboard configuration for xclip
+-- Manual clipboard configuration for wl-clipboard (Wayland)
 vim.g.clipboard = {
-  name = 'xclip',
+  name = 'wl-clipboard',
   copy = {
-    ['+'] = 'xclip -i -selection clipboard',
-    ['*'] = 'xclip -i -selection primary',
+    ['+'] = 'wl-copy',
+    ['*'] = 'wl-copy --primary',
   },
   paste = {
-    ['+'] = 'timeout 5s xclip -o -selection clipboard 2>/dev/null',
-    ['*'] = 'timeout 5s xclip -o -selection primary 2>/dev/null',
+    ['+'] = 'wl-paste --no-newline',
+    ['*'] = 'wl-paste --primary --no-newline',
   },
   cache_enabled = 0,
 }
