@@ -233,7 +233,6 @@ function run_hyprland {
         arch)
             pkg_install wofi swww wl_clipboard grim slurp wlogout brightnessctl
             aur_install matugen-bin ags-hyprpanel-git better-control-git
-            aur_install sddm-silent-theme-git redhat-fonts
             ;;
         *)
             echo "Hyprland tools not configured for $DISTRO"
@@ -247,14 +246,6 @@ function run_hyprland {
     ln -sfn "$(pwd)/.config/kitty" "$HOME/.config/kitty"
     ln -sfn "$(pwd)/.config/gtk-3.0" "$HOME/.config/gtk-3.0"
     ln -sfn "$(pwd)/.config/gtk-4.0" "$HOME/.config/gtk-4.0"
-    # SilentSDDM theme config (requires sudo)
-    if [ -d /usr/share/sddm/themes/silent ]; then
-        echo "Configuring SilentSDDM theme..."
-        sudo cp "$(pwd)/.config/sddm-silent/theme.conf" /usr/share/sddm/themes/silent/configs/custom.conf
-        sudo cp "$HOME/.config/background" /usr/share/sddm/themes/silent/backgrounds/background.jpg 2>/dev/null || true
-        sudo sed -i 's/ConfigFile=.*/ConfigFile=configs\/custom.conf/' /usr/share/sddm/themes/silent/metadata.desktop
-        echo -e "[Theme]\nCurrent=silent" | sudo tee /etc/sddm.conf.d/theme.conf > /dev/null
-    fi
     finished "hyprland"
 }
 
@@ -300,6 +291,32 @@ function run_apps {
     # Tidal (flatpak on both)
     flatpak install -y flathub com.mastermindzh.tidal-hifi
     finished "apps"
+}
+
+SDDM="sddm"
+if [ "$DISTRO" = "arch" ]; then
+    SECTIONS+=("$SDDM"); DESCRIPTIONS+=("SilentSDDM theme with HiDPI")
+fi
+function run_sddm {
+    begin "$SDDM" "$(get_desc $SDDM)"
+    case "$DISTRO" in
+        arch)
+            aur_install sddm-silent-theme-git redhat-fonts
+            ;;
+        *)
+            echo "SDDM theme not configured for $DISTRO"
+            return
+            ;;
+    esac
+    # Symlink main sddm.conf (HiDPI + theme selection)
+    sudo ln -sf "$(pwd)/sddm/sddm.conf" /etc/sddm.conf
+    # Copy theme customization to silent theme
+    if [ -d /usr/share/sddm/themes/silent ]; then
+        sudo cp "$(pwd)/sddm/silent-theme.conf" /usr/share/sddm/themes/silent/configs/custom.conf
+        sudo cp "$HOME/.config/background" /usr/share/sddm/themes/silent/backgrounds/background.jpg 2>/dev/null || true
+        sudo sed -i 's/ConfigFile=.*/ConfigFile=configs\/custom.conf/' /usr/share/sddm/themes/silent/metadata.desktop
+    fi
+    finished "sddm"
 }
 
 # =============================================================================

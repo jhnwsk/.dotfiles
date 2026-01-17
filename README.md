@@ -67,6 +67,7 @@ This launches an interactive menu where you can select which components to insta
 | 14 | hyprland | Hyprland + hypridle + hyprlock |
 | 15 | chrome | Google Chrome |
 | 16 | apps | Discord, Signal, TradingView, Tidal |
+| 17 | sddm | SilentSDDM theme with HiDPI (Arch only) |
 
 The script is idempotent - safe to run multiple times on the same system.
 
