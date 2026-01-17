@@ -79,6 +79,16 @@ PKG_UBUNTU[luarocks]="luarocks"
 PKG_ARCH[luarocks]="luarocks"
 
 # =============================================================================
+# GOGH DEPENDENCIES
+# =============================================================================
+
+PKG_UBUNTU[dconf_cli]="dconf-cli"
+PKG_ARCH[dconf_cli]="dconf"
+
+PKG_UBUNTU[uuid_runtime]="uuid-runtime"
+PKG_ARCH[uuid_runtime]="util-linux-libs"
+
+# =============================================================================
 # PYTHON
 # =============================================================================
 
@@ -137,6 +147,12 @@ PKG_ARCH[grim]="grim"
 
 PKG_UBUNTU[slurp]=""
 PKG_ARCH[slurp]="slurp"
+
+PKG_UBUNTU[wlogout]=""
+PKG_ARCH[wlogout]="wlogout"
+
+PKG_UBUNTU[brightnessctl]=""
+PKG_ARCH[brightnessctl]="brightnessctl"
 
 # =============================================================================
 # LOOKUP FUNCTION

@@ -63,11 +63,12 @@ function run_shell {
     # Nerd fonts (cross-platform)
     curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
     getnf -i "FiraCode FiraMono"
-    # Gogh terminal theme - GNOME Terminal only
-    if [ "$DESKTOP_ENV" = "gnome" ]; then
-        echo "252" | bash -c "$(wget -qO- https://git.io/vQgMr)"
+    # Gogh terminal theme (supports GNOME Terminal, kitty, alacritty, etc.)
+    if [ "$DESKTOP_ENV" = "gnome" ] || command -v kitty &> /dev/null; then
+        pkg_install dconf_cli uuid_runtime
+        echo "343" | bash -c "$(wget -qO- https://git.io/vQgMr)"
     else
-        echo "Skipping Gogh (GNOME Terminal theme) - not running GNOME"
+        echo "Skipping Gogh - no supported terminal detected"
     fi
     # Zsh + antigen + starship (cross-platform)
     sudo usermod -s /usr/bin/zsh $(whoami)
@@ -138,15 +139,8 @@ function run_rust {
 PYTHON="python"; SECTIONS+=("$PYTHON"); DESCRIPTIONS+=("dead snakes")
 function run_python {
     begin "$PYTHON" "$(get_desc $PYTHON)"
-    case "$DISTRO" in
-        ubuntu)
-            sudo apt-get install -y python3-pip python3-venv python3-dev
-            ;;
-        arch)
-            # On Arch, python package includes pip and venv
-            sudo pacman -S --noconfirm --needed python python-pip
-            ;;
-    esac
+    # python_venv and python_dev are empty on Arch (included in python package)
+    pkg_install python python_pip python_venv python_dev
     finished "python"
 }
 
@@ -213,11 +207,8 @@ if [ "$DESKTOP_ENV" = "gnome" ]; then
 fi
 function run_gnome {
     begin "$GNOME" "$(get_desc $GNOME)"
-    pkg_install dconf_editor gnome_tweaks gnome_extensions
-    # gnome-system-tools only on Ubuntu
-    if [ "$DISTRO" = "ubuntu" ]; then
-        sudo apt-get install -y gnome-system-tools
-    fi
+    # gnome_system_tools is empty on Arch (not available)
+    pkg_install dconf_editor gnome_tweaks gnome_extensions gnome_system_tools
     # Load saved dconf settings
     dconf load / < dconf/dconf-24.04.ini
     finished "gnome"
