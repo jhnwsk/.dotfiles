@@ -35,6 +35,15 @@ Using **ananicy-cpp** (CachyOS default) - do NOT install gamemode, they conflict
 
 ## Steam Settings
 
+### Hyprland Fix (Black Rectangle)
+Steam shows a black window on Hyprland. Fix by launching with:
+```bash
+steam -no-cef-sandbox
+```
+
+A patched desktop entry is at `~/.local/share/applications/steam.desktop`.
+
+### Downloads Settings
 In Steam > Settings > Downloads:
 - Uncheck "Allow background processing of Vulkan shaders"
 - Uncheck "Enable Shader Pre-caching"
