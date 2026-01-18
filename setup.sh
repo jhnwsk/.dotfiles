@@ -268,6 +268,8 @@ function run_apps {
     begin "$APPS" "$(get_desc $APPS)"
     # Terminal/CLI apps
     pkg_install yazi pwvucontrol
+    # All-in-one messenger (WhatsApp, Messenger, etc.)
+    pkg_install ferdium
     # Discord (vesktop for Wayland)
     if [ "$DESKTOP_ENV" = "hyprland" ]; then
         pkg_install vesktop

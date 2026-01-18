@@ -182,6 +182,9 @@ PKG_ARCH[pwvucontrol]="pwvucontrol"
 PKG_UBUNTU[vesktop]=""
 PKG_ARCH[vesktop]="vesktop"
 
+PKG_UBUNTU[ferdium]=""
+PKG_ARCH[ferdium]="ferdium-bin"
+
 # =============================================================================
 # THEMING (AUR)
 # =============================================================================
