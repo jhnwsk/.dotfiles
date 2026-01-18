@@ -223,6 +223,7 @@ function run_hyprland {
     case "$DISTRO" in
         arch)
             pkg_install wofi swww wl_clipboard grim slurp wlogout brightnessctl
+            pkg_install hypridle hyprlock hyprlauncher nwg_displays
             aur_install matugen-bin ags-hyprpanel-git better-control-git
             ;;
         *)
@@ -265,8 +266,14 @@ function run_chrome {
 APPS="apps"; SECTIONS+=("$APPS"); DESCRIPTIONS+=("appppppppppps!")
 function run_apps {
     begin "$APPS" "$(get_desc $APPS)"
-    # Discord
-    snap_or_alt "discord" "--classic" "discord" "pacman"
+    # Terminal/CLI apps
+    pkg_install yazi pwvucontrol
+    # Discord (vesktop for Wayland)
+    if [ "$DESKTOP_ENV" = "hyprland" ]; then
+        pkg_install vesktop
+    else
+        snap_or_alt "discord" "--classic" "discord" "pacman"
+    fi
     # Signal
     snap_or_alt "signal-desktop" "" "signal-desktop" "pacman"
     # TradingView - snap on Ubuntu, flatpak on Arch

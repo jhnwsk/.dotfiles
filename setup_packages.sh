@@ -154,6 +154,41 @@ PKG_ARCH[wlogout]="wlogout"
 PKG_UBUNTU[brightnessctl]=""
 PKG_ARCH[brightnessctl]="brightnessctl"
 
+PKG_UBUNTU[hypridle]=""
+PKG_ARCH[hypridle]="hypridle"
+
+PKG_UBUNTU[hyprlock]=""
+PKG_ARCH[hyprlock]="hyprlock"
+
+PKG_UBUNTU[hyprlauncher]=""
+PKG_ARCH[hyprlauncher]="hyprlauncher"
+
+PKG_UBUNTU[nwg_displays]=""
+PKG_ARCH[nwg_displays]="nwg-displays"
+
+PKG_UBUNTU[hyprpanel]=""
+PKG_ARCH[hyprpanel]="ags-hyprpanel-git"
+
+# =============================================================================
+# APPS
+# =============================================================================
+
+PKG_UBUNTU[yazi]=""
+PKG_ARCH[yazi]="yazi"
+
+PKG_UBUNTU[pwvucontrol]=""
+PKG_ARCH[pwvucontrol]="pwvucontrol"
+
+PKG_UBUNTU[vesktop]=""
+PKG_ARCH[vesktop]="vesktop"
+
+# =============================================================================
+# THEMING (AUR)
+# =============================================================================
+
+PKG_UBUNTU[matugen]=""
+PKG_ARCH[matugen]="matugen-bin"  # AUR
+
 # =============================================================================
 # LOOKUP FUNCTION
 # =============================================================================
