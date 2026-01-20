@@ -238,6 +238,11 @@ function run_hyprland {
     ln -sfn "$(pwd)/.config/kitty" "$HOME/.config/kitty"
     ln -sfn "$(pwd)/.config/gtk-3.0" "$HOME/.config/gtk-3.0"
     ln -sfn "$(pwd)/.config/gtk-4.0" "$HOME/.config/gtk-4.0"
+    # Custom scripts
+    mkdir -p "$HOME/.local/bin"
+    ln -sf "$(pwd)/.local/bin/audio-to-default" "$HOME/.local/bin/audio-to-default"
+    ln -sf "$(pwd)/.local/bin/hypr-reload" "$HOME/.local/bin/hypr-reload"
+    ln -sf "$(pwd)/.local/bin/monitor-toggle" "$HOME/.local/bin/monitor-toggle"
     finished "hyprland"
 }
 
