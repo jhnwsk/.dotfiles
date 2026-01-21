@@ -59,6 +59,36 @@ Switch profiles in `pwvucontrol` or:
 pactl set-card-profile <card-name> a2dp-sink
 ```
 
+## Hyprland Keybindings
+
+### Window Management
+
+| Keybind | Action |
+|---------|--------|
+| `Super + H/J/K/L` | Move focus |
+| `Super + Shift + H/J/K/L` | Move/swap window |
+| `Super + Shift + 1-9` | Move window to workspace |
+| `Super + Escape` | Lock screen |
+| `Super + Shift + A` | Move all audio to default sink |
+
+Config: `.config/hypr/conf/keybinding.conf`
+
+## Default Browser
+
+If terminal links open in Chrome instead of Firefox:
+
+```bash
+# Set Firefox as default
+xdg-settings set default-web-browser firefox.desktop
+xdg-mime default firefox.desktop x-scheme-handler/http
+xdg-mime default firefox.desktop x-scheme-handler/https
+```
+
+Also add to `.zshrc`:
+```bash
+export BROWSER=firefox
+```
+
 ## Packages
 
 ### Audio Stack
