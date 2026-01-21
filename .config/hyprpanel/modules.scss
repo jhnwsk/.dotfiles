@@ -1,0 +1,12 @@
+// Custom hyprpanel styles
+// Remove rounding from bar buttons
+.bar-button,
+.bar-button-icon {
+    border-radius: 0px;
+}
+
+// Remove rounding from menus
+.menu-container,
+.menu-items {
+    border-radius: 0px;
+}
