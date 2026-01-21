@@ -22,6 +22,7 @@ eval "$(starship init zsh)"
 
 # it's where all kinds of cool stuff live
 export PATH="$HOME/.local/bin:$PATH"
+export BROWSER=firefox
 
 # node's nvm
 export NVM_DIR="$HOME/.nvm"
