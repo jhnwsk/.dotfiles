@@ -10,9 +10,9 @@
 window {
   margin: 0px;
   padding: 10px;
-  border: 2px solid #9bcbfb;
+  border: 2px solid #82d3e2;
   border-radius: 0;
-  background-color: #101418;
+  background-color: #0e1416;
 }
 
 /* Inner Box */
@@ -20,7 +20,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #101418;
+  background-color: #0e1416;
 }
 
 /* Outer Box */
@@ -28,7 +28,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #101418;
+  background-color: #0e1416;
 }
 
 /* Scroll */
@@ -36,27 +36,27 @@ window {
   margin: 0px;
   padding: 10px;
   border: none;
-  background-color: #101418;
+  background-color: #0e1416;
 }
 
 /* Input */
 #input {
   margin: 24px 24px 5px 24px;
   padding: 12px;
-  border: 1px solid #8c9198;
+  border: 1px solid #899294;
   border-radius: 0;
-  color: #e0e2e8;
-  background-color: #1c2024;
+  color: #dee3e5;
+  background-color: #1b2122;
 }
 
 #input image {
   border: none;
-  color: #d3bfe6;
+  color: #bbc5ea;
   margin-right: 10px;
 }
 
 #input:focus {
-  border: 1px solid #9bcbfb;
+  border: 1px solid #82d3e2;
   outline: none;
 }
 
@@ -64,30 +64,30 @@ window {
 #text {
   margin: 5px;
   border: none;
-  color: #e0e2e8;
+  color: #dee3e5;
 }
 
 #entry {
   margin: 0;
-  background-color: #101418;
+  background-color: #0e1416;
   border-radius: 0;
 }
 
 #entry arrow {
   border: none;
-  color: #9bcbfb;
+  color: #82d3e2;
 }
 
 /* Selected Entry */
 #entry:selected {
-  background-color: #0d4a73;
+  background-color: #004f59;
   border: none;
 }
 
 #entry:selected #text {
-  color: #cee5ff;
+  color: #9eeffe;
 }
 
 #entry:drop(active) {
-  background-color: #b9c8da !important;
+  background-color: #b1cbd0 !important;
 }
