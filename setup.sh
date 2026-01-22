@@ -246,8 +246,8 @@ function run_hyprland {
     # Set default wallpaper and generate matugen colors
     local default_wallpaper="$(pwd)/wallpapers/sea_surf_foam_2560x1600.jpg"
     if [ -f "$default_wallpaper" ]; then
-        cp "$default_wallpaper" "$HOME/.config/background.jpg"
-        matugen image "$HOME/.config/background.jpg"
+        cp "$default_wallpaper" "$HOME/.config/background"
+        matugen image "$HOME/.config/background"
         echo "Generated color themes from default wallpaper"
     fi
     finished "hyprland"
