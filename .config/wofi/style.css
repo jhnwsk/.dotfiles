@@ -10,9 +10,9 @@
 window {
   margin: 0px;
   padding: 10px;
-  border: 2px solid #82d3e2;
+  border: 2px solid #80d4da;
   border-radius: 0;
-  background-color: #0e1416;
+  background-color: #0e1415;
 }
 
 /* Inner Box */
@@ -20,7 +20,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #0e1416;
+  background-color: #0e1415;
 }
 
 /* Outer Box */
@@ -28,7 +28,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #0e1416;
+  background-color: #0e1415;
 }
 
 /* Scroll */
@@ -36,27 +36,27 @@ window {
   margin: 0px;
   padding: 10px;
   border: none;
-  background-color: #0e1416;
+  background-color: #0e1415;
 }
 
 /* Input */
 #input {
   margin: 24px 24px 5px 24px;
   padding: 12px;
-  border: 1px solid #899294;
+  border: 1px solid #899393;
   border-radius: 0;
-  color: #dee3e5;
-  background-color: #1b2122;
+  color: #dde4e4;
+  background-color: #1a2121;
 }
 
 #input image {
   border: none;
-  color: #bbc5ea;
+  color: #b6c7ea;
   margin-right: 10px;
 }
 
 #input:focus {
-  border: 1px solid #82d3e2;
+  border: 1px solid #80d4da;
   outline: none;
 }
 
@@ -64,30 +64,30 @@ window {
 #text {
   margin: 5px;
   border: none;
-  color: #dee3e5;
+  color: #dde4e4;
 }
 
 #entry {
   margin: 0;
-  background-color: #0e1416;
+  background-color: #0e1415;
   border-radius: 0;
 }
 
 #entry arrow {
   border: none;
-  color: #82d3e2;
+  color: #80d4da;
 }
 
 /* Selected Entry */
 #entry:selected {
-  background-color: #004f59;
+  background-color: #004f53;
   border: none;
 }
 
 #entry:selected #text {
-  color: #9eeffe;
+  color: #9cf0f6;
 }
 
 #entry:drop(active) {
-  background-color: #b1cbd0 !important;
+  background-color: #b1cccd !important;
 }
