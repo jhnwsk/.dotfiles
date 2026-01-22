@@ -243,6 +243,13 @@ function run_hyprland {
     ln -sf "$(pwd)/.local/bin/audio-to-default" "$HOME/.local/bin/audio-to-default"
     ln -sf "$(pwd)/.local/bin/hypr-reload" "$HOME/.local/bin/hypr-reload"
     ln -sf "$(pwd)/.local/bin/monitor-toggle" "$HOME/.local/bin/monitor-toggle"
+    # Set default wallpaper and generate matugen colors
+    local default_wallpaper="$(pwd)/wallpapers/sea_surf_foam_2560x1600.jpg"
+    if [ -f "$default_wallpaper" ]; then
+        cp "$default_wallpaper" "$HOME/.config/background.jpg"
+        matugen image "$HOME/.config/background.jpg"
+        echo "Generated color themes from default wallpaper"
+    fi
     finished "hyprland"
 }
 
@@ -273,6 +280,7 @@ function run_apps {
     begin "$APPS" "$(get_desc $APPS)"
     # Terminal/CLI apps
     pkg_install yazi pwvucontrol
+    ln -sfn "$(pwd)/.config/yazi" "$HOME/.config/yazi"
     # All-in-one messenger (WhatsApp, Messenger, etc.)
     pkg_install ferdium
     # Discord (vesktop for Wayland)
