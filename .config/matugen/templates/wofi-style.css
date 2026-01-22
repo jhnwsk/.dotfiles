@@ -10,9 +10,9 @@
 window {
   margin: 0px;
   padding: 10px;
-  border: 2px solid #9bcbfb;
+  border: 2px solid {{colors.primary.default.hex}};
   border-radius: 8px;
-  background-color: #101418;
+  background-color: {{colors.surface.default.hex}};
 }
 
 /* Inner Box */
@@ -20,7 +20,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #101418;
+  background-color: {{colors.surface.default.hex}};
 }
 
 /* Outer Box */
@@ -28,7 +28,7 @@ window {
   margin: 5px;
   padding: 10px;
   border: none;
-  background-color: #101418;
+  background-color: {{colors.surface.default.hex}};
 }
 
 /* Scroll */
@@ -36,7 +36,7 @@ window {
   margin: 0px;
   padding: 10px;
   border: none;
-  background-color: #101418;
+  background-color: {{colors.surface.default.hex}};
 }
 
 /* Input */
@@ -45,13 +45,13 @@ window {
   padding: 10px;
   border: none;
   border-radius: 0.1em;
-  color: #e0e2e8;
-  background-color: #1c2024;
+  color: {{colors.on_surface.default.hex}};
+  background-color: {{colors.surface_container.default.hex}};
 }
 
 #input image {
   border: none;
-  color: #9bcbfb;
+  color: {{colors.primary.default.hex}};
 }
 
 #input:focus {
@@ -63,29 +63,29 @@ window {
 #text {
   margin: 5px;
   border: none;
-  color: #e0e2e8;
+  color: {{colors.on_surface.default.hex}};
 }
 
 #entry {
-  background-color: #101418;
+  background-color: {{colors.surface.default.hex}};
   border-radius: 4px;
 }
 
 #entry arrow {
   border: none;
-  color: #9bcbfb;
+  color: {{colors.primary.default.hex}};
 }
 
 /* Selected Entry */
 #entry:selected {
-  background-color: #0d4a73;
+  background-color: {{colors.primary_container.default.hex}};
   border: none;
 }
 
 #entry:selected #text {
-  color: #cee5ff;
+  color: {{colors.on_primary_container.default.hex}};
 }
 
 #entry:drop(active) {
-  background-color: #b9c8da !important;
+  background-color: {{colors.secondary.default.hex}} !important;
 }

@@ -24,3 +24,7 @@ output_path = "~/.config/hypr/hyprtoolkit.conf"
 
 [config.custom_colors]
 # You can define custom named colors here if needed
+
+[templates.wofi-style]
+input_path = "~/.config/matugen/templates/wofi-style.css"
+output_path = "~/.config/wofi/style.css"
