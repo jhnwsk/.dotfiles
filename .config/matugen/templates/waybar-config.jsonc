@@ -49,11 +49,11 @@
             "weeks-pos": "left",
             "on-scroll": 1,
             "format": {
-                "months": "<span color='#9bcbfb'><b>{}</b></span>",
-                "days": "<span color='#e0e2e8'>{}</span>",
-                "weeks": "<span color='#d3bfe6'><b>W{}</b></span>",
-                "weekdays": "<span color='#b9c8da'><b>{}</b></span>",
-                "today": "<span color='#ffb4ab'><b><u>{}</u></b></span>"
+                "months": "<span color='{{colors.primary.default.hex}}'><b>{}</b></span>",
+                "days": "<span color='{{colors.on_surface.default.hex}}'>{}</span>",
+                "weeks": "<span color='{{colors.tertiary.default.hex}}'><b>W{}</b></span>",
+                "weekdays": "<span color='{{colors.secondary.default.hex}}'><b>{}</b></span>",
+                "today": "<span color='{{colors.error.default.hex}}'><b><u>{}</u></b></span>"
             }
         }
     },

@@ -1,0 +1,12 @@
+#!/bin/bash
+# Calendar wofi popup for waybar
+
+# Generate calendar with week numbers
+cal_output=$(cal -m -w)
+
+# Show in wofi (read-only, just for display)
+echo "$cal_output" | wofi --dmenu \
+    --prompt "$(date '+%B %Y')" \
+    --cache-file /dev/null \
+    --width 250 \
+    --height 220

@@ -136,8 +136,14 @@ window#waybar > box {
 tooltip {
     background: @background;
     border: 1px solid @primary;
+    border-radius: 0;
 }
 
 tooltip label {
     color: @foreground;
+}
+
+/* Calendar tooltip */
+#clock tooltip {
+    padding: 8px;
 }
