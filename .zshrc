@@ -37,4 +37,3 @@ export PATH="$FLYCTL_INSTALL/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # aliases
-alias td="tmux-dev"

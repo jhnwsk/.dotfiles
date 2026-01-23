@@ -113,6 +113,6 @@
 
 ## Custom Config
 
-Clipboard is configured with `xclip` for system integration:
+Clipboard is configured with `wl-clipboard` for system integration:
 - Yank (`y`) copies to system clipboard
 - Paste (`p`) pastes from system clipboard
