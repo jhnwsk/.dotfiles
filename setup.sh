@@ -222,7 +222,7 @@ function run_hyprland {
     begin "$HYPRLAND" "$(get_desc $HYPRLAND)"
     case "$DISTRO" in
         arch)
-            pkg_install wofi swww wl_clipboard grim slurp wlogout brightnessctl
+            pkg_install waybar dunst wofi swww wl_clipboard grim slurp wlogout brightnessctl
             pkg_install hypridle hyprlock hyprlauncher nwg_displays
             aur_install matugen-bin better-control-git
             ;;
@@ -231,6 +231,7 @@ function run_hyprland {
             ;;
     esac
     ln -sfn "$(pwd)/.config/hypr" "$HOME/.config/hypr"
+    ln -sfn "$(pwd)/.config/waybar" "$HOME/.config/waybar"
     ln -sfn "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
     ln -sfn "$(pwd)/.config/wofi" "$HOME/.config/wofi"
     ln -sfn "$(pwd)/.config/matugen" "$HOME/.config/matugen"
@@ -242,6 +243,8 @@ function run_hyprland {
     ln -sf "$(pwd)/.local/bin/audio-to-default" "$HOME/.local/bin/audio-to-default"
     ln -sf "$(pwd)/.local/bin/hypr-reload" "$HOME/.local/bin/hypr-reload"
     ln -sf "$(pwd)/.local/bin/monitor-toggle" "$HOME/.local/bin/monitor-toggle"
+    ln -sf "$(pwd)/.local/bin/bluetooth-menu" "$HOME/.local/bin/bluetooth-menu"
+    ln -sf "$(pwd)/.local/bin/network-menu" "$HOME/.local/bin/network-menu"
     # Set default wallpaper and generate matugen colors
     local default_wallpaper="$(pwd)/wallpapers/sea_surf_foam_2560x1600.jpg"
     if [ -f "$default_wallpaper" ]; then
