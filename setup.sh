@@ -2,16 +2,13 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/setup_fns.sh"
 source "$SCRIPT_DIR/setup_distro.sh"
-source "$SCRIPT_DIR/setup_packages.sh"
 
-# Detect system configuration
 detect_distro
 
 # Create arrays to hold section names and descriptions
 SECTIONS=()
 DESCRIPTIONS=()
 
-# Helper to look up description by section name
 get_desc() {
     local section="$1"
     for i in "${!SECTIONS[@]}"; do
@@ -31,15 +28,8 @@ function run_base {
     begin "$BASE" "$(get_desc $BASE)"
     pkg_update
     pkg_upgrade
-    # the must-haves
-    pkg_install zsh htop git curl tldr direnv ncdu xclip
-    # the nice-to-haves
-    pkg_install build_essential libssl flatpak gparted
-    # Snapd only on Ubuntu
-    if [ "$DISTRO" = "ubuntu" ]; then
-        sudo apt-get install -y snapd
-    fi
-    # Enable flathub
+    pkg_install zsh htop git curl tealdeer direnv ncdu xclip
+    pkg_install base-devel openssl flatpak gparted
     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
     finished "base packages"
 }
@@ -60,17 +50,10 @@ function run_git {
 SHELL_SETUP="shell"; SECTIONS+=("$SHELL_SETUP"); DESCRIPTIONS+=("because what you're really after... is ~sway~")
 function run_shell {
     begin "$SHELL_SETUP" "$(get_desc $SHELL_SETUP)"
-    # Nerd fonts (cross-platform)
+    # Nerd fonts
     curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
     getnf -i "FiraCode FiraMono"
-    # Gogh terminal theme (supports GNOME Terminal, kitty, alacritty, etc.)
-    if [ "$DESKTOP_ENV" = "gnome" ] || command -v kitty &> /dev/null; then
-        pkg_install dconf_cli uuid_runtime
-        echo "343" | bash -c "$(wget -qO- https://git.io/vQgMr)"
-    else
-        echo "Skipping Gogh - no supported terminal detected"
-    fi
-    # Zsh + antigen + starship (cross-platform)
+    # Zsh + antigen + starship
     sudo usermod -s /usr/bin/zsh $(whoami)
     curl -L git.io/antigen > ~/.antigen.zsh
     ln -sf "$(pwd)/.antigenrc" "$HOME/.antigenrc"
@@ -86,17 +69,15 @@ function run_shell {
 TMUX="tmux"; SECTIONS+=("$TMUX"); DESCRIPTIONS+=("terminal multiplexer")
 function run_tmux {
     begin "$TMUX" "$(get_desc $TMUX)"
-    snap_or_alt "tmux" "--classic" "tmux" "pacman"
+    pkg_install tmux
     ln -sf "$(pwd)/.tmux.conf" "$HOME/.tmux.conf"
     mkdir -p "$HOME/.local/bin"
     ln -sf "$(pwd)/.local/bin/tmux-dev" "$HOME/.local/bin/tmux-dev"
     if [ ! -d ~/.tmux/plugins/tpm ]; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     else
-        echo "TPM already installed, updating..."
         git -C ~/.tmux/plugins/tpm pull
     fi
-    # Install TPM plugins and copy custom Tomorrow Night theme
     ~/.tmux/plugins/tpm/bin/install_plugins
     cp "$(pwd)/.config/tmux/tomorrow_night.conf" ~/.tmux/plugins/tmux/themes/catppuccin_tomorrow_night_tmux.conf
     finished "tmux"
@@ -105,9 +86,7 @@ function run_tmux {
 NVIM="nvim"; SECTIONS+=("$NVIM"); DESCRIPTIONS+=("the one true editor")
 function run_nvim {
     begin "$NVIM" "$(get_desc $NVIM)"
-    snap_or_alt "nvim" "--classic" "neovim" "pacman"
-    pkg_install cargo ripgrep lua luarocks
-    # Backup existing nvim config
+    pkg_install neovim rust ripgrep lua luarocks
     mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null
     mv ~/.local/state/nvim ~/.local/state/nvim.bak 2>/dev/null
     mv ~/.cache/nvim ~/.cache/nvim.bak 2>/dev/null
@@ -139,8 +118,7 @@ function run_rust {
 PYTHON="python"; SECTIONS+=("$PYTHON"); DESCRIPTIONS+=("dead snakes")
 function run_python {
     begin "$PYTHON" "$(get_desc $PYTHON)"
-    # python_venv and python_dev are empty on Arch (included in python package)
-    pkg_install python python_pip python_venv python_dev
+    pkg_install python python-pip
     finished "python"
 }
 
@@ -149,19 +127,15 @@ function run_nodejs {
     begin "$NODEJS" "$(get_desc $NODEJS)"
     curl -o- https://fnm.vercel.app/install | bash
     fnm install 22
-    node -v
-    npm -v
     finished "nodejs"
 }
 
 DOCKER="docker"; SECTIONS+=("$DOCKER"); DESCRIPTIONS+=("'agua mala', the man said, 'you whore'")
 function run_docker {
     begin "$DOCKER" "$(get_desc $DOCKER)"
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sudo sh get-docker.sh
-    echo "don't forget to..."
-    echo "sudo groupadd docker; sudo usermod -aG docker $USER"
-    echo "...later"
+    pkg_install docker docker-compose
+    sudo systemctl enable docker
+    sudo usermod -aG docker $USER
     finished "docker"
 }
 
@@ -175,61 +149,29 @@ function run_harlequin {
 }
 
 # =============================================================================
-# DESKTOP & APPS
+# DESKTOP
 # =============================================================================
 
 GRUB="grub"; SECTIONS+=("$GRUB"); DESCRIPTIONS+=("tela bootloader theme + os-prober")
 function run_grub {
     begin "$GRUB" "$(get_desc $GRUB)"
-    # Install Tela theme
     local tmp_dir=$(mktemp -d)
     git clone --depth 1 https://github.com/vinceliuice/grub2-themes.git "$tmp_dir"
     sudo "$tmp_dir/install.sh" -t tela
     rm -rf "$tmp_dir"
-    # Install and run os-prober to detect other OSes
-    pkg_install os_prober
+    pkg_install os-prober
     sudo os-prober
-    # Regenerate GRUB config
-    case "$DISTRO" in
-        ubuntu)
-            sudo update-grub
-            ;;
-        arch)
-            sudo grub-mkconfig -o /boot/grub/grub.cfg
-            ;;
-    esac
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
     finished "grub (tela theme + os-prober)"
 }
 
-GNOME="gnome"
-if [ "$DESKTOP_ENV" = "gnome" ]; then
-    SECTIONS+=("$GNOME"); DESCRIPTIONS+=("diggy diggy hole!")
-fi
-function run_gnome {
-    begin "$GNOME" "$(get_desc $GNOME)"
-    # gnome_system_tools is empty on Arch (not available)
-    pkg_install dconf_editor gnome_tweaks gnome_extensions gnome_system_tools
-    # Load saved dconf settings
-    dconf load / < dconf/dconf-24.04.ini
-    finished "gnome"
-}
-
-HYPRLAND="hyprland"
-if [ "$DESKTOP_ENV" = "hyprland" ]; then
-    SECTIONS+=("$HYPRLAND"); DESCRIPTIONS+=("the wayland way")
-fi
+HYPRLAND="hyprland"; SECTIONS+=("$HYPRLAND"); DESCRIPTIONS+=("the wayland way")
 function run_hyprland {
     begin "$HYPRLAND" "$(get_desc $HYPRLAND)"
-    case "$DISTRO" in
-        arch)
-            pkg_install waybar dunst wofi swww wl_clipboard grim slurp wlogout brightnessctl
-            pkg_install hypridle hyprlock hyprlauncher nwg_displays kitty btop
-            aur_install matugen-bin better-control-git
-            ;;
-        *)
-            echo "Hyprland tools not configured for $DISTRO"
-            ;;
-    esac
+    pkg_install waybar dunst wofi swww wl-clipboard grim slurp wlogout brightnessctl
+    pkg_install hypridle hyprlock hyprlauncher nwg-displays kitty btop
+    aur_install matugen-bin better-control-git
+    # Config symlinks
     ln -sfn "$(pwd)/.config/hypr" "$HOME/.config/hypr"
     ln -sfn "$(pwd)/.config/waybar" "$HOME/.config/waybar"
     ln -sfn "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
@@ -245,7 +187,8 @@ function run_hyprland {
     ln -sf "$(pwd)/.local/bin/monitor-toggle" "$HOME/.local/bin/monitor-toggle"
     ln -sf "$(pwd)/.local/bin/bluetooth-menu" "$HOME/.local/bin/bluetooth-menu"
     ln -sf "$(pwd)/.local/bin/network-menu" "$HOME/.local/bin/network-menu"
-    # Set default wallpaper and generate matugen colors
+    # Wallpaper and matugen
+    mkdir -p "$HOME/.config/dunst"
     local default_wallpaper="$(pwd)/wallpapers/sea_surf_foam_2560x1600.jpg"
     if [ -f "$default_wallpaper" ]; then
         cp "$default_wallpaper" "$HOME/.config/background"
@@ -258,74 +201,24 @@ function run_hyprland {
 CHROME="chrome"; SECTIONS+=("$CHROME"); DESCRIPTIONS+=("because of reasons")
 function run_chrome {
     begin "$CHROME" "$(get_desc $CHROME)"
-    case "$DISTRO" in
-        ubuntu)
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-            sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
-            rm -f google-chrome-stable_current_amd64.deb
-            if [ "$DESKTOP_ENV" = "gnome" ]; then
-                sudo apt-get install -y chrome-gnome-shell
-            fi
-            ;;
-        arch)
-            aur_install google-chrome
-            if [ "$DESKTOP_ENV" = "gnome" ]; then
-                pkg_install chrome_gnome_shell
-            fi
-            ;;
-    esac
+    aur_install google-chrome
     finished "chrome"
 }
 
 APPS="apps"; SECTIONS+=("$APPS"); DESCRIPTIONS+=("appppppppppps!")
 function run_apps {
     begin "$APPS" "$(get_desc $APPS)"
-    # Terminal/CLI apps
-    pkg_install yazi pwvucontrol
+    pkg_install yazi pwvucontrol vesktop ferdium-bin signal-desktop
     ln -sfn "$(pwd)/.config/yazi" "$HOME/.config/yazi"
-    # All-in-one messenger (WhatsApp, Messenger, etc.)
-    pkg_install ferdium
-    # Discord (vesktop for Wayland)
-    if [ "$DESKTOP_ENV" = "hyprland" ]; then
-        pkg_install vesktop
-    else
-        snap_or_alt "discord" "--classic" "discord" "pacman"
-    fi
-    # Signal
-    snap_or_alt "signal-desktop" "" "signal-desktop" "pacman"
-    # TradingView - snap on Ubuntu, flatpak on Arch
-    case "$DISTRO" in
-        ubuntu)
-            sudo snap install tradingview --classic
-            ;;
-        arch)
-            flatpak install -y flathub com.tradingview.tradingview || \
-                echo "TradingView: Use web version or install manually from AUR"
-            ;;
-    esac
-    # Tidal (flatpak on both)
     flatpak install -y flathub com.mastermindzh.tidal-hifi
     finished "apps"
 }
 
-SDDM="sddm"
-if [ "$DISTRO" = "arch" ]; then
-    SECTIONS+=("$SDDM"); DESCRIPTIONS+=("SilentSDDM theme with HiDPI")
-fi
+SDDM="sddm"; SECTIONS+=("$SDDM"); DESCRIPTIONS+=("SilentSDDM theme with HiDPI")
 function run_sddm {
     begin "$SDDM" "$(get_desc $SDDM)"
-    case "$DISTRO" in
-        arch)
-            aur_install sddm-silent-theme-git redhat-fonts
-            ;;
-        *)
-            echo "SDDM theme not configured for $DISTRO"
-            return
-            ;;
-    esac
-    # Symlink main sddm.conf (HiDPI + theme selection)
+    aur_install sddm-silent-theme-git redhat-fonts
     sudo ln -sf "$(pwd)/sddm/sddm.conf" /etc/sddm.conf
-    # Copy theme customization to silent theme
     if [ -d /usr/share/sddm/themes/silent ]; then
         sudo cp "$(pwd)/sddm/silent-theme.conf" /usr/share/sddm/themes/silent/configs/custom.conf
         sudo cp "$HOME/.config/background" /usr/share/sddm/themes/silent/backgrounds/background.jpg 2>/dev/null || true
@@ -345,7 +238,6 @@ function run_all_done {
 }
 
 show_menu() {
-    # Set dark green color scheme for whiptail
     export NEWT_COLORS='
         root=white,black
         window=white,black
@@ -372,14 +264,12 @@ show_menu() {
         disentry=gray,black
     '
 
-    # Build the checklist arguments with ALL option first
     local args=()
     args+=("ALL" ">>> Install everything <<<" "OFF")
     for i in "${!SECTIONS[@]}"; do
         args+=("$((i+1))" "${SECTIONS[i]} - ${DESCRIPTIONS[i]}" "OFF")
     done
 
-    # Show whiptail checklist and capture selection
     local choices
     choices=$(whiptail --title "Dotfiles Setup" \
         --checklist "SPACE=toggle, ENTER=confirm" \
@@ -387,13 +277,11 @@ show_menu() {
         "${args[@]}" \
         3>&1 1>&2 2>&3)
 
-    # Return the choices (space-separated numbers in quotes)
     echo "$choices"
 }
 
 run_sections() {
     local indices="$1"
-    # Check if ALL was selected
     if [[ "$indices" == *"ALL"* ]]; then
         for section in "${SECTIONS[@]}"; do
             function_name="run_${section}"
@@ -401,9 +289,7 @@ run_sections() {
         done
         return
     fi
-    # Remove quotes and iterate
     for index in $indices; do
-        # Strip quotes from each index
         index="${index//\"/}"
         section="${SECTIONS[index-1]}"
         function_name="run_${section}"
@@ -412,13 +298,11 @@ run_sections() {
 }
 
 if [ "$1" == "--all" ]; then
-    # Run all sections
     for section in "${SECTIONS[@]}"; do
         function_name="run_${section}"
         $function_name
     done
 elif [ "$#" -eq 0 ]; then
-    # Interactive mode with whiptail
     selected=$(show_menu)
     if [ -n "$selected" ]; then
         run_sections "$selected"
@@ -427,7 +311,6 @@ elif [ "$#" -eq 0 ]; then
         exit 0
     fi
 else
-    # Run specific sections by number
     for index in "$@"; do
         section="${SECTIONS[index-1]}"
         function_name="run_${section}"
@@ -435,5 +318,4 @@ else
     done
 fi
 
-# Always run the "all done" section last
 run_all_done

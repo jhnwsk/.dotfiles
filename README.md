@@ -6,7 +6,7 @@
 
 ---
 
-Personal dotfiles for Arch Linux with Hyprland. Wallpaper-based theming via matugen.
+Personal dotfiles for Arch Linux with Hyprland. Tested on CachyOS. Wallpaper-based theming via matugen.
 
 ## Quick Start
 
