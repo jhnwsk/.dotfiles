@@ -62,12 +62,14 @@
     "cpu": {
         "format": "󰻠 {usage}%",
         "tooltip": true,
-        "interval": 2
+        "interval": 2,
+        "on-click": "kitty btop"
     },
 
     "memory": {
         "format": "󰍛 {}%",
-        "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB"
+        "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB",
+        "on-click": "kitty btop"
     },
 
     "battery": {
@@ -88,7 +90,7 @@
         "format-ethernet": "󰈀 {ipaddr}",
         "format-disconnected": "󰖪 Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "nm-connection-editor"
+        "on-click": "~/.local/bin/network-menu"
     },
 
     "bluetooth": {

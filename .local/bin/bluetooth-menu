@@ -112,9 +112,8 @@ show_menu() {
     local selected=$(echo -e "$menu" | wofi --dmenu \
         --prompt "Bluetooth" \
         --cache-file /dev/null \
-        --width 450 \
-        --height 300 \
-        --lines 10)
+        --width 600 \
+        --height 300)
 
     # Handle selection
     if [[ -z "$selected" ]]; then
