@@ -223,7 +223,7 @@ function run_hyprland {
     case "$DISTRO" in
         arch)
             pkg_install waybar dunst wofi swww wl_clipboard grim slurp wlogout brightnessctl
-            pkg_install hypridle hyprlock hyprlauncher nwg_displays
+            pkg_install hypridle hyprlock hyprlauncher nwg_displays kitty btop
             aur_install matugen-bin better-control-git
             ;;
         *)
