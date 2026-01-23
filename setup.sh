@@ -76,15 +76,15 @@ function run_desktop {
     pkg_install hypridle hyprlock nwg-displays kitty btop
     aur_install matugen-bin better-control-git
 
-    # Config symlinks
-    ln -sfn "$(pwd)/.config/hypr" "$HOME/.config/hypr"
-    ln -sfn "$(pwd)/.config/waybar" "$HOME/.config/waybar"
-    ln -sfn "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
-    ln -sfn "$(pwd)/.config/wofi" "$HOME/.config/wofi"
-    ln -sfn "$(pwd)/.config/matugen" "$HOME/.config/matugen"
-    ln -sfn "$(pwd)/.config/kitty" "$HOME/.config/kitty"
-    ln -sfn "$(pwd)/.config/gtk-3.0" "$HOME/.config/gtk-3.0"
-    ln -sfn "$(pwd)/.config/gtk-4.0" "$HOME/.config/gtk-4.0"
+    # Config symlinks (link_dir removes existing dirs first)
+    link_dir "$(pwd)/.config/hypr" "$HOME/.config/hypr"
+    link_dir "$(pwd)/.config/waybar" "$HOME/.config/waybar"
+    link_dir "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
+    link_dir "$(pwd)/.config/wofi" "$HOME/.config/wofi"
+    link_dir "$(pwd)/.config/matugen" "$HOME/.config/matugen"
+    link_dir "$(pwd)/.config/kitty" "$HOME/.config/kitty"
+    link_dir "$(pwd)/.config/gtk-3.0" "$HOME/.config/gtk-3.0"
+    link_dir "$(pwd)/.config/gtk-4.0" "$HOME/.config/gtk-4.0"
 
     # Custom scripts
     mkdir -p "$HOME/.local/bin"
@@ -105,7 +105,7 @@ function run_desktop {
 
     # Desktop apps
     pkg_install yazi pwvucontrol vesktop ferdium-bin signal-desktop
-    ln -sfn "$(pwd)/.config/yazi" "$HOME/.config/yazi"
+    link_dir "$(pwd)/.config/yazi" "$HOME/.config/yazi"
 
     # Chrome
     aur_install google-chrome
@@ -116,6 +116,9 @@ function run_desktop {
     sudo mkdir -p /var/cache/tuigreet
     sudo chown greeter:greeter /var/cache/tuigreet
     sudo chmod 0755 /var/cache/tuigreet
+    sudo systemctl disable sddm.service 2>/dev/null
+    sudo systemctl disable gdm.service 2>/dev/null
+    sudo systemctl disable lightdm.service 2>/dev/null
     sudo systemctl enable greetd.service
 
     finished "desktop (hyprland/apps/chrome/greetd)"
@@ -144,7 +147,7 @@ function run_terminal {
     mv ~/.local/share/nvim ~/.local/share/nvim.bak 2>/dev/null
     mv ~/.local/state/nvim ~/.local/state/nvim.bak 2>/dev/null
     mv ~/.cache/nvim ~/.cache/nvim.bak 2>/dev/null
-    ln -sfn "$(pwd)/.config/astronvim_v5" "$HOME/.config/nvim"
+    link_dir "$(pwd)/.config/astronvim_v5" "$HOME/.config/nvim"
 
     # Vim
     pkg_install vim
