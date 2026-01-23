@@ -65,7 +65,7 @@ function run_core {
 }
 
 # =============================================================================
-# DESKTOP - hyprland + apps + chrome + sddm
+# DESKTOP - hyprland + apps + chrome + greetd
 # =============================================================================
 
 function run_desktop {
@@ -110,16 +110,15 @@ function run_desktop {
     # Chrome
     aur_install google-chrome
 
-    # SDDM theme
-    aur_install sddm-silent-theme-git redhat-fonts
-    sudo ln -sf "$(pwd)/sddm/sddm.conf" /etc/sddm.conf
-    if [ -d /usr/share/sddm/themes/silent ]; then
-        sudo cp "$(pwd)/sddm/silent-theme.conf" /usr/share/sddm/themes/silent/configs/custom.conf
-        sudo cp "$HOME/.config/background" /usr/share/sddm/themes/silent/backgrounds/background.jpg 2>/dev/null || true
-        sudo sed -i 's/ConfigFile=.*/ConfigFile=configs\/custom.conf/' /usr/share/sddm/themes/silent/metadata.desktop
-    fi
+    # Login manager (greetd + tuigreet)
+    pkg_install greetd greetd-tuigreet
+    sudo ln -sf "$(pwd)/greetd/config.toml" /etc/greetd/config.toml
+    sudo mkdir -p /var/cache/tuigreet
+    sudo chown greeter:greeter /var/cache/tuigreet
+    sudo chmod 0755 /var/cache/tuigreet
+    sudo systemctl enable greetd.service
 
-    finished "desktop (hyprland/apps/chrome/sddm)"
+    finished "desktop (hyprland/apps/chrome/greetd)"
 }
 
 # =============================================================================
