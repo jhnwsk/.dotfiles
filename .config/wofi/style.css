@@ -89,5 +89,5 @@ window {
 }
 
 #entry:drop(active) {
-  background-color: #b9c8da !important;
+  background-color: #b9c8da;
 }

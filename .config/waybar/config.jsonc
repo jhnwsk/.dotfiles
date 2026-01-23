@@ -3,9 +3,9 @@
     "position": "top",
     "height": 34,
     "spacing": 4,
-    "margin-top": 9,
-    "margin-left": 9,
-    "margin-right": 9,
+    "margin-top": 10,
+    "margin-left": 10,
+    "margin-right": 10,
 
     "modules-left": [
         "hyprland/workspaces",
@@ -98,7 +98,7 @@
         "tooltip-format": "{controller_alias}\n{num_connections} connected",
         "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}",
-        "on-click": "blueman-manager"
+        "on-click": "~/.local/bin/bluetooth-menu"
     },
 
     "wireplumber": {
