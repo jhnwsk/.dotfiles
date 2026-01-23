@@ -89,5 +89,5 @@ window {
 }
 
 #entry:drop(active) {
-  background-color: {{colors.secondary.default.hex}} !important;
+  background-color: {{colors.secondary.default.hex}};
 }
