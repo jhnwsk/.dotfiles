@@ -26,6 +26,10 @@ output_path = "~/.config/hypr/conf/colors.conf"
 input_path = "~/.config/matugen/templates/hyprtoolkit.conf"
 output_path = "~/.config/hypr/hyprtoolkit.conf"
 
+[templates.hyprlock]
+input_path = "~/.config/matugen/templates/hyprlock.conf"
+output_path = "~/.config/hypr/hyprlock.conf"
+
 [config.custom_colors]
 # You can define custom named colors here if needed
 
