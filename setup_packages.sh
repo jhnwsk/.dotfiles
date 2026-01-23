@@ -166,9 +166,6 @@ PKG_ARCH[hyprlauncher]="hyprlauncher"
 PKG_UBUNTU[nwg_displays]=""
 PKG_ARCH[nwg_displays]="nwg-displays"
 
-PKG_UBUNTU[hyprpanel]=""
-PKG_ARCH[hyprpanel]="ags-hyprpanel-git"
-
 # =============================================================================
 # APPS
 # =============================================================================

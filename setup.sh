@@ -224,14 +224,13 @@ function run_hyprland {
         arch)
             pkg_install wofi swww wl_clipboard grim slurp wlogout brightnessctl
             pkg_install hypridle hyprlock hyprlauncher nwg_displays
-            aur_install matugen-bin ags-hyprpanel-git better-control-git
+            aur_install matugen-bin better-control-git
             ;;
         *)
             echo "Hyprland tools not configured for $DISTRO"
             ;;
     esac
     ln -sfn "$(pwd)/.config/hypr" "$HOME/.config/hypr"
-    ln -sfn "$(pwd)/.config/hyprpanel" "$HOME/.config/hyprpanel"
     ln -sfn "$(pwd)/.config/wlogout" "$HOME/.config/wlogout"
     ln -sfn "$(pwd)/.config/wofi" "$HOME/.config/wofi"
     ln -sfn "$(pwd)/.config/matugen" "$HOME/.config/matugen"
