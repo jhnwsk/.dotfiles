@@ -104,7 +104,8 @@ function run_desktop {
     fi
 
     # Desktop apps
-    pkg_install yazi pwvucontrol vesktop ferdium-bin signal-desktop
+    pkg_install yazi pwvucontrol vesktop signal-desktop
+    aur_install ferdium-bin
     link_dir "$(pwd)/.config/yazi" "$HOME/.config/yazi"
 
     # Chrome
