@@ -98,7 +98,7 @@ function run_desktop {
     mkdir -p "$HOME/.config/dunst"
     local default_wallpaper="$(pwd)/wallpapers/sea_surf_foam_2560x1600.jpg"
     if [ -f "$default_wallpaper" ]; then
-        cp "$default_wallpaper" "$HOME/.config/background"
+        ln -sf "$default_wallpaper" "$HOME/.config/background.jpg"
         matugen image "$default_wallpaper"
         echo "Generated color themes from default wallpaper"
     fi

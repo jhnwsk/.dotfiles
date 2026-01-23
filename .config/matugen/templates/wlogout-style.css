@@ -6,13 +6,13 @@
 }
 
 window {
-    background-color: rgba(16, 20, 24, 0.9);
+    background-color: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.9);
 }
 
 button {
-    color: #e0e2e8;
-    background-color: #1c2024;
-    border: 2px solid #8c9198;
+    color: {{colors.on_surface.default.hex}};
+    background-color: {{colors.surface_container.default.hex}};
+    border: 2px solid {{colors.outline.default.hex}};
     background-repeat: no-repeat;
     background-position: center;
     background-size: 25%;
@@ -22,13 +22,13 @@ button {
 }
 
 button:hover {
-    background-color: #272a2f;
-    border-color: #9bcbfb;
+    background-color: {{colors.surface_container_high.default.hex}};
+    border-color: {{colors.primary.default.hex}};
 }
 
 button:focus {
-    background-color: #323539;
-    border-color: #9bcbfb;
+    background-color: {{colors.surface_container_highest.default.hex}};
+    border-color: {{colors.primary.default.hex}};
 }
 
 #lock {
@@ -36,7 +36,7 @@ button:focus {
 }
 
 #lock:hover {
-    border-color: #9bcbfb;
+    border-color: {{colors.primary.default.hex}};
 }
 
 #logout {
@@ -44,7 +44,7 @@ button:focus {
 }
 
 #logout:hover {
-    border-color: #d3bfe6;
+    border-color: {{colors.tertiary.default.hex}};
 }
 
 #suspend {
@@ -52,7 +52,7 @@ button:focus {
 }
 
 #suspend:hover {
-    border-color: #b9c8da;
+    border-color: {{colors.secondary.default.hex}};
 }
 
 #hibernate {
@@ -60,7 +60,7 @@ button:focus {
 }
 
 #hibernate:hover {
-    border-color: #d3bfe6;
+    border-color: {{colors.tertiary.default.hex}};
 }
 
 #reboot {
@@ -68,7 +68,7 @@ button:focus {
 }
 
 #reboot:hover {
-    border-color: #b9c8da;
+    border-color: {{colors.secondary.default.hex}};
 }
 
 #shutdown {
@@ -76,5 +76,5 @@ button:focus {
 }
 
 #shutdown:hover {
-    border-color: #ffb4ab;
+    border-color: {{colors.error.default.hex}};
 }
