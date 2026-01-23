@@ -1,15 +1,15 @@
 #!/bin/bash
-# Auto-enable laptop display when external is disconnected
+# Auto-disable laptop display when external is connected
 
-EXTERNAL="DP-5"
 LAPTOP="eDP-1"
 
-if hyprctl monitors | grep -q "$EXTERNAL"; then
+# Check if any external monitor (DP-* or HDMI-*) is connected
+if hyprctl monitors | grep -qE "^Monitor (DP|HDMI)-"; then
     # External connected - disable laptop
     hyprctl keyword monitor "$LAPTOP,disable"
     echo "External connected: laptop display disabled"
 else
-    # External disconnected - enable laptop
-    hyprctl keyword monitor "$LAPTOP,3456x2160,0x0,2"
+    # External disconnected - enable laptop at preferred mode
+    hyprctl keyword monitor "$LAPTOP,preferred,auto,auto"
     echo "External disconnected: laptop display enabled"
 fi
