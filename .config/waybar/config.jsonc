@@ -89,6 +89,7 @@
         "format-wifi": "󰖩  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-ethernet": "󰈀  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-disconnected": "󰖪 Disconnected",
+        "format-disabled": "󰖪 No Network",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",
