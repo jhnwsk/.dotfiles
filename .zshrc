@@ -45,4 +45,4 @@ if [ -d "$FNM_PATH" ]; then
   eval "$(fnm env)"
 fi
 
-. "$HOME/.cargo/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
