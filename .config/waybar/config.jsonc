@@ -86,6 +86,7 @@
 
     "network": {
         "interval": 3,
+        "format": "󰖪 Off",
         "format-wifi": "󰖩  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-ethernet": "󰈀  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-disconnected": "󰖪 Disconnected",
