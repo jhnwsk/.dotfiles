@@ -8,6 +8,14 @@
 
 Personal dotfiles for Arch Linux with Hyprland. Tested on CachyOS. Wallpaper-based theming via matugen.
 
+## Prerequisites
+
+```bash
+sudo pacman -S git dialog paru
+```
+
+`yay` can be used instead of `paru` if preferred.
+
 ## Quick Start
 
 ```bash
