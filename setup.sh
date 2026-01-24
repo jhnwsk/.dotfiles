@@ -85,6 +85,7 @@ function run_desktop {
     link_dir "$(pwd)/.config/kitty" "$HOME/.config/kitty"
     link_dir "$(pwd)/.config/gtk-3.0" "$HOME/.config/gtk-3.0"
     link_dir "$(pwd)/.config/gtk-4.0" "$HOME/.config/gtk-4.0"
+    link_dir "$(pwd)/.config/btop" "$HOME/.config/btop"
 
     # Custom scripts
     mkdir -p "$HOME/.local/bin"
