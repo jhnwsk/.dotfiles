@@ -2,25 +2,44 @@
 
 Turn a CachyOS install into a console-like SteamMachine that boots directly into Steam Big Picture via gamescope.
 
+## Getting Started
+
+Fresh CachyOS install without network? Connect via TTY:
+
+```bash
+# Press Ctrl+Alt+F2 for a terminal, then:
+nmtui                        # Connect to WiFi (interactive)
+git clone <your-repo>
+cd <repo>
+./setup_gaming.sh
+```
+
+Or use ethernet (works automatically) or copy the repo via USB.
+
 ## Quick Start
 
 ```bash
 ./setup_gaming.sh
 ```
 
-Select sections from the menu, or run `./setup_gaming.sh --all` for unattended install.
+The script automatically installs everything needed, then asks if you want the optional Hyprland fallback desktop.
 
-## Sections
+### Unattended Install
 
-| # | Section | Description |
-|---|---------|-------------|
-| 1 | base | Audio (pipewire) + essentials |
-| 2 | gpu | Auto-detect and install GPU drivers |
-| 3 | gaming | Steam, gamescope, Proton, Wine via CachyOS packages |
-| 4 | greetd | Auto-login directly into gamescope-session |
-| 5 | fallback | Optional Hyprland desktop for non-gaming tasks |
+```bash
+./setup_gaming.sh --with-fallback   # Include Hyprland desktop
+./setup_gaming.sh --no-fallback     # Steam-only, no desktop
+```
 
-## How It Works
+## What Gets Installed
+
+| Step | Description |
+|------|-------------|
+| base | Audio (pipewire) + essentials |
+| gpu | Auto-detect and install GPU drivers |
+| gaming | Steam, gamescope, Proton, Wine via CachyOS packages |
+| greetd | Auto-login directly into gamescope-session |
+| fallback | *(optional)* Hyprland desktop for non-gaming tasks |
 
 ### CachyOS Packages
 
@@ -40,7 +59,7 @@ Automatically detects your GPU and installs appropriate drivers:
 - **AMD**: `mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon`
 - **Intel**: `mesa lib32-mesa vulkan-intel lib32-vulkan-intel`
 
-### Boot Flow
+## Boot Flow
 
 1. System boots
 2. greetd starts `gamescope-session-steam` as configured user

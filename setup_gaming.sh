@@ -8,32 +8,12 @@ source "$SCRIPT_DIR/setup_distro.sh"
 
 detect_distro
 
-# Section definitions: name + description
-SECTIONS=("base" "gpu" "gaming" "greetd" "fallback")
-DESCRIPTIONS=(
-    "audio + essentials"
-    "graphics drivers"
-    "steam + gamescope"
-    "auto-login config"
-    "hyprland desktop"
-)
-
-get_desc() {
-    local section="$1"
-    for i in "${!SECTIONS[@]}"; do
-        if [[ "${SECTIONS[i]}" == "$section" ]]; then
-            echo "${DESCRIPTIONS[i]}"
-            return
-        fi
-    done
-}
-
 # =============================================================================
 # BASE - audio + essentials
 # =============================================================================
 
 function run_base {
-    begin "base" "$(get_desc base)"
+    begin "base" "audio + essentials"
 
     pkg_update
     pkg_upgrade
@@ -66,7 +46,7 @@ detect_gpu() {
 }
 
 function run_gpu {
-    begin "gpu" "$(get_desc gpu)"
+    begin "gpu" "graphics drivers"
 
     local gpu_type=$(detect_gpu)
 
@@ -97,7 +77,7 @@ function run_gpu {
 # =============================================================================
 
 function run_gaming {
-    begin "gaming" "$(get_desc gaming)"
+    begin "gaming" "steam + gamescope"
 
     # CachyOS gaming meta-packages
     # - cachyos-gaming-meta: Proton, Wine, 32-bit libs, Vulkan tools, audio plugins
@@ -115,7 +95,7 @@ function run_gaming {
 # =============================================================================
 
 function run_greetd {
-    begin "greetd" "$(get_desc greetd)"
+    begin "greetd" "auto-login config"
 
     pkg_install greetd
 
@@ -148,7 +128,7 @@ EOF
 # =============================================================================
 
 function run_fallback {
-    begin "fallback" "$(get_desc fallback)"
+    begin "fallback" "hyprland desktop"
 
     # Minimal Hyprland for when you need to exit Steam
     pkg_install hyprland kitty waybar wofi
@@ -162,67 +142,70 @@ function run_fallback {
 }
 
 # =============================================================================
-# RUNNER
+# MAIN
 # =============================================================================
 
-ALL_DONE="all_done"
-function run_all_done {
+show_usage() {
+    echo "Usage: $0 [OPTIONS]"
+    echo ""
+    echo "SteamMachine setup - installs everything needed for a console-like experience."
+    echo ""
+    echo "Options:"
+    echo "  --with-fallback    Unattended install with Hyprland fallback desktop"
+    echo "  --no-fallback      Unattended install without fallback desktop"
+    echo "  -h, --help         Show this help"
+    echo ""
+    echo "Without options, runs interactively and asks about fallback desktop."
+}
+
+run_core() {
+    run_base
+    run_gpu
+    run_gaming
+    run_greetd
+}
+
+show_complete() {
     dialog --title " SteamMachine Ready " --msgbox "\nSetup complete!\n\nReboot to start Steam Big Picture.\n\nController should work for navigation.\n" 10 50
     clear
 }
 
-show_menu() {
-    local args=()
-    args+=("ALL" ">>> Full SteamMachine setup <<<" "OFF")
-    for i in "${!SECTIONS[@]}"; do
-        args+=("$((i+1))" "${SECTIONS[i]} - ${DESCRIPTIONS[i]}" "OFF")
-    done
+# Parse arguments
+INSTALL_FALLBACK=""
 
-    local choices
-    choices=$(dialog --stdout --title "SteamMachine Setup (CachyOS)" \
-        --checklist "SPACE=toggle, ENTER=confirm" \
-        15 60 10 \
-        "${args[@]}")
-
-    echo "$choices"
-}
-
-run_sections() {
-    local indices="$1"
-    if [[ "$indices" == *"ALL"* ]]; then
-        for section in "${SECTIONS[@]}"; do
-            function_name="run_${section}"
-            $function_name
-        done
-        return
-    fi
-    for index in $indices; do
-        index="${index//\"/}"
-        section="${SECTIONS[index-1]}"
-        function_name="run_${section}"
-        $function_name
-    done
-}
-
-if [ "$1" == "--all" ]; then
-    for section in "${SECTIONS[@]}"; do
-        function_name="run_${section}"
-        $function_name
-    done
-elif [ "$#" -eq 0 ]; then
-    selected=$(show_menu)
-    if [ -n "$selected" ]; then
-        run_sections "$selected"
-    else
-        echo "No sections selected. Exiting."
+case "${1:-}" in
+    --with-fallback)
+        INSTALL_FALLBACK="yes"
+        ;;
+    --no-fallback)
+        INSTALL_FALLBACK="no"
+        ;;
+    -h|--help)
+        show_usage
         exit 0
+        ;;
+    "")
+        # Interactive mode - will ask
+        INSTALL_FALLBACK=""
+        ;;
+    *)
+        echo "Unknown option: $1"
+        show_usage
+        exit 1
+        ;;
+esac
+
+# Run core sections
+run_core
+
+# Handle fallback desktop
+if [ -z "$INSTALL_FALLBACK" ]; then
+    # Interactive: ask user
+    if dialog --stdout --yesno "Install fallback desktop (Hyprland)?\n\nUseful for non-gaming tasks when you exit Steam." 9 50; then
+        run_fallback
     fi
-else
-    for index in "$@"; do
-        section="${SECTIONS[index-1]}"
-        function_name="run_${section}"
-        $function_name
-    done
+elif [ "$INSTALL_FALLBACK" = "yes" ]; then
+    run_fallback
 fi
 
-run_all_done
+show_complete
