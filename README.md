@@ -31,9 +31,20 @@ Interactive menu lets you pick what to install. Or `./setup.sh --all` for everyt
 - **Shell**: zsh + antigen + starship + nerd fonts
 - **Editor**: neovim (AstroNvim) + vim
 - **Terminal**: kitty + tmux
-- **Desktop**: hyprland + waybar + wofi + dunst + wlogout
+- **Desktop**: hyprland + waybar + wofi + dunst + wlogout + kanshi
 - **Theming**: matugen (wallpaper-based colors for waybar, wofi, dunst, hyprland)
 - **Dev**: rust, python, nodejs, docker
+
+## Monitor Setup
+
+Display profiles are managed by kanshi. On first setup, the config is copied (not symlinked) since monitor identifiers are machine-specific.
+
+To configure for your monitors:
+
+```bash
+kanshi-setup                  # Detect monitors and get profile suggestions
+vim ~/.config/kanshi/config   # Edit with suggested profiles
+```
 
 ## Theming
 
