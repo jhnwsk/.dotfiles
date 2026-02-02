@@ -85,7 +85,7 @@ function run_gaming {
     pkg_install cachyos-gaming-meta cachyos-gaming-applications
 
     # Steam Deck-like session (gamescope-session)
-    pkg_install cachyos-handheld
+    pkg_install cachyos-handheld gamescope-session-steam-git
 
     finished "gaming (steam/gamescope/proton)"
 }
