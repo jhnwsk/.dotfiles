@@ -1,0 +1,31 @@
+#!/bin/bash
+# Detect monitors and suggest kanshi profiles
+
+echo "# Detected monitors:"
+echo "# Copy relevant lines to ~/.config/kanshi/config"
+echo ""
+
+# Get monitor info from hyprctl
+monitors=$(hyprctl monitors -j)
+
+# Parse and format for kanshi
+echo "$monitors" | jq -r '.[] | "# \(.name): \(.make) \(.model) \(.serial)"'
+echo ""
+
+# Generate profile template
+laptop=$(echo "$monitors" | jq -r '.[] | select(.name == "eDP-1") | .name')
+externals=$(echo "$monitors" | jq -r '.[] | select(.name != "eDP-1")')
+
+if [ -n "$externals" ]; then
+    echo "profile docked {"
+    [ -n "$laptop" ] && echo "    output eDP-1 disable"
+    echo "$monitors" | jq -r '.[] | select(.name != "eDP-1") | "    output \"\(.make) \(.model) *\" mode \(.width)x\(.height)@\(.refreshRate)Hz position 0,0"'
+    echo "}"
+    echo ""
+fi
+
+if [ -n "$laptop" ]; then
+    echo "profile laptop-only {"
+    echo "    output eDP-1 enable scale 2"
+    echo "}"
+fi

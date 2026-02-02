@@ -73,7 +73,7 @@ function run_desktop {
 
     # Hyprland and Wayland tools
     pkg_install waybar dunst wofi swww wl-clipboard grim slurp wlogout brightnessctl
-    pkg_install hypridle hyprlock nwg-displays kitty btop
+    pkg_install hypridle hyprlock nwg-displays kitty btop kanshi
     aur_install matugen-bin better-control-git
 
     # Config symlinks (link_dir removes existing dirs first)
@@ -87,13 +87,22 @@ function run_desktop {
     link_dir "$(pwd)/.config/gtk-4.0" "$HOME/.config/gtk-4.0"
     link_dir "$(pwd)/.config/btop" "$HOME/.config/btop"
 
+    # Kanshi - copy instead of symlink (config contains machine-specific monitor identifiers)
+    mkdir -p "$HOME/.config/kanshi"
+    if [ ! -f "$HOME/.config/kanshi/config" ]; then
+        cp "$(pwd)/.config/kanshi/config" "$HOME/.config/kanshi/config"
+        echo "Kanshi config copied - run 'kanshi-setup' to detect your monitors"
+    else
+        echo "Kanshi config exists, skipping (run 'kanshi-setup' to reconfigure)"
+    fi
+
     # Custom scripts
     mkdir -p "$HOME/.local/bin"
     ln -sf "$(pwd)/.local/bin/audio-to-default" "$HOME/.local/bin/audio-to-default"
     ln -sf "$(pwd)/.local/bin/hypr-reload" "$HOME/.local/bin/hypr-reload"
-    ln -sf "$(pwd)/.local/bin/monitor-toggle" "$HOME/.local/bin/monitor-toggle"
     ln -sf "$(pwd)/.local/bin/bluetooth-menu" "$HOME/.local/bin/bluetooth-menu"
     ln -sf "$(pwd)/.local/bin/network-menu" "$HOME/.local/bin/network-menu"
+    ln -sf "$(pwd)/.local/bin/kanshi-setup" "$HOME/.local/bin/kanshi-setup"
 
     # Wallpaper and matugen
     mkdir -p "$HOME/.config/dunst"
