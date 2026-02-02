@@ -1,0 +1,63 @@
+# SteamMachine Setup
+
+Turn a CachyOS install into a console-like SteamMachine that boots directly into Steam Big Picture via gamescope.
+
+## Quick Start
+
+```bash
+./setup_gaming.sh
+```
+
+Select sections from the menu, or run `./setup_gaming.sh --all` for unattended install.
+
+## Sections
+
+| # | Section | Description |
+|---|---------|-------------|
+| 1 | base | Audio (pipewire) + essentials |
+| 2 | gpu | Auto-detect and install GPU drivers |
+| 3 | gaming | Steam, gamescope, Proton, Wine via CachyOS packages |
+| 4 | greetd | Auto-login directly into gamescope-session |
+| 5 | fallback | Optional Hyprland desktop for non-gaming tasks |
+
+## How It Works
+
+### CachyOS Packages
+
+The script uses CachyOS meta-packages which bundle everything needed:
+
+| Package | Contents |
+|---------|----------|
+| `cachyos-gaming-meta` | Proton, Wine, 32-bit libs, Vulkan tools, audio plugins |
+| `cachyos-gaming-applications` | Steam, gamescope, mangohud, gamemode |
+| `cachyos-handheld` | Gamescope-session (Steam Deck-like boot) |
+
+### GPU Detection
+
+Automatically detects your GPU and installs appropriate drivers:
+
+- **NVIDIA**: `nvidia nvidia-utils lib32-nvidia-utils`
+- **AMD**: `mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon`
+- **Intel**: `mesa lib32-mesa vulkan-intel lib32-vulkan-intel`
+
+### Boot Flow
+
+1. System boots
+2. greetd starts `gamescope-session-steam` as configured user
+3. Steam Big Picture launches in gamescope compositor
+4. Controller navigation works out of the box
+
+## Post-Install
+
+After rebooting, you should land directly in Steam Big Picture mode. Use a controller to navigate.
+
+**WiFi**: Configure in Steam > Settings > Internet. NetworkManager is installed by the base section.
+
+To exit to a terminal: press `Ctrl+Alt+F2` for a TTY.
+
+If you installed the fallback desktop, edit `/etc/greetd/config.toml` to switch between sessions.
+
+## References
+
+- [CachyOS Gaming Guide](https://wiki.cachyos.org/configuration/gaming/)
+- [CachyOS Handheld](https://github.com/CachyOS/CachyOS-Handheld)

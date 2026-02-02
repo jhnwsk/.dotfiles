@@ -26,6 +26,10 @@ cd ~/.dotfiles
 
 Interactive menu lets you pick what to install. Or `./setup.sh --all` for everything.
 
+### SteamMachine
+
+Want a console-like gaming PC instead? See [STEAMMACHINE.md](STEAMMACHINE.md) - boots directly into Steam Big Picture via gamescope.
+
 ## What's Inside
 
 - **Shell**: zsh + antigen + starship + nerd fonts
