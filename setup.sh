@@ -49,7 +49,8 @@ function run_core {
 
     # Nerd fonts
     curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
-    getnf -i "FiraCode FiraMono"
+    ~/.local/bin/getnf -i "FiraCode FiraMono"
+    fc-cache -f
 
     # Zsh + antigen + starship
     sudo usermod -s /usr/bin/zsh $(whoami)
