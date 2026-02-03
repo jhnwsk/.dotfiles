@@ -3,9 +3,6 @@
     "position": "top",
     "height": 34,
     "spacing": 4,
-    "margin-top": 10,
-    "margin-left": 10,
-    "margin-right": 10,
 
     "modules-left": [
         "hyprland/workspaces",
@@ -27,11 +24,7 @@
     "hyprland/workspaces": {
         "disable-scroll": false,
         "all-outputs": true,
-        "format": "{icon}",
-        "format-icons": {
-            "active": "●",
-            "default": "○"
-        }
+        "format": "{name}"
     },
 
     "hyprland/window": {
@@ -86,11 +79,9 @@
 
     "network": {
         "interval": 3,
-        "format": "󰖪 Off",
         "format-wifi": "󰖩  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-ethernet": "󰈀  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-disconnected": "󰖪 Disconnected",
-        "format-disabled": "󰖪 No Network",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-ethernet": "{ifname}",
         "tooltip-format-disconnected": "Disconnected",

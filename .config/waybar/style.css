@@ -1,4 +1,4 @@
-/* Waybar Styles - Matugen colors from wallpaper */
+/* Waybar Styles - Matugen colors with underline accents */
 
 @import "colors.css";
 
@@ -6,55 +6,67 @@
     font-family: "FiraCode Nerd Font", "Font Awesome 6 Free", sans-serif;
     font-size: 13px;
     min-height: 0;
+    border: none;
+    border-radius: 0;
 }
 
 window#waybar {
-    background: transparent;
-}
-
-window#waybar > box {
-    background: alpha(@background, 0.8);
-    border: 1px solid alpha(@primary, 0.3);
+    background: alpha(@background, 0.9);
 }
 
 /* Workspaces */
 #workspaces {
-    margin-left: 8px;
+    margin-left: 4px;
 }
 
 #workspaces button {
-    padding: 0 8px;
+    padding: 6px 10px;
+    margin: 4px 2px;
     color: @foreground;
     background: transparent;
-    margin: 4px 2px;
+    border-radius: 0;
+    border-bottom: solid 3px alpha(@primary, 0.4);
 }
 
 #workspaces button:hover {
-    background: alpha(@primary, 0.2);
+    color: @primary;
+    background: alpha(@primary, 0.15);
+    border-bottom: solid 3px @primary;
 }
 
 #workspaces button.active {
-    background: alpha(@primary, 0.4);
-    color: @foreground;
+    color: @primary;
+    background: alpha(@primary, 0.2);
+    border-bottom: solid 3px @primary;
 }
 
 #workspaces button.urgent {
-    background: alpha(@error, 0.4);
+    color: @error;
+    background: alpha(@error, 0.2);
+    border-bottom: solid 3px @error;
 }
 
 /* Window title */
 #window {
-    color: @foreground;
-    padding: 0 12px;
+    color: @secondary;
+    font-weight: bold;
+    padding: 6px 12px;
+    margin: 4px 3px;
+    border-radius: 0;
+    border-bottom: solid 3px @secondary;
 }
 
 /* Clock */
 #clock {
-    color: @foreground;
+    color: @tertiary;
     font-weight: bold;
+    padding: 6px 12px;
+    margin: 4px 3px;
+    border-radius: 0;
+    border-bottom: solid 3px @tertiary;
 }
 
-/* Right modules */
+/* Common module styling */
 #cpu,
 #memory,
 #battery,
@@ -62,65 +74,88 @@ window#waybar > box {
 #network,
 #wireplumber,
 #tray {
-    padding: 0 10px;
-    margin: 4px 2px;
+    padding: 6px 12px;
+    margin: 4px 3px;
     color: @foreground;
+    background: transparent;
+    border-radius: 0;
 }
 
+/* CPU - error color (heat/load association) */
 #cpu {
-    background: alpha(@error, 0.2);
+    color: @error;
+    border-bottom: solid 3px @error;
 }
 
+/* Memory - tertiary color */
 #memory {
-    background: alpha(@accent, 0.2);
+    color: @tertiary;
+    border-bottom: solid 3px @tertiary;
 }
 
+/* Battery - primary normally, changes based on state */
 #battery {
-    background: alpha(@success, 0.2);
+    color: @primary;
+    border-bottom: solid 3px @primary;
     margin-right: 8px;
 }
 
 #battery.warning {
-    background: alpha(@warning, 0.3);
+    color: @error;
+    border-bottom: solid 3px @error;
 }
 
 #battery.critical {
-    background: alpha(@error, 0.3);
+    color: @error;
+    border-bottom: solid 3px @error;
 }
 
 #battery.charging {
-    background: alpha(@success, 0.3);
+    color: @primary;
+    border-bottom: solid 3px @primary;
 }
 
+/* Network - primary */
 #network {
-    background: alpha(@primary, 0.2);
+    color: @primary;
+    border-bottom: solid 3px @primary;
 }
 
 #network.disconnected {
-    background: alpha(@error, 0.2);
+    color: @error;
+    border-bottom: solid 3px @error;
 }
 
+/* Bluetooth - secondary */
 #bluetooth {
-    background: alpha(@primary, 0.2);
+    color: @secondary;
+    border-bottom: solid 3px @secondary;
 }
 
 #bluetooth.connected {
-    background: alpha(@primary, 0.3);
+    color: @secondary;
+    border-bottom: solid 3px @secondary;
 }
 
 #bluetooth.disabled {
-    background: alpha(@background-alt, 0.2);
+    color: alpha(@foreground, 0.4);
+    border-bottom: solid 3px alpha(@foreground, 0.3);
 }
 
+/* Audio - tertiary */
 #wireplumber {
-    background: alpha(@secondary, 0.2);
+    color: @tertiary;
+    border-bottom: solid 3px @tertiary;
 }
 
 #wireplumber.muted {
-    background: alpha(@background-alt, 0.4);
+    color: alpha(@foreground, 0.4);
+    border-bottom: solid 3px alpha(@foreground, 0.3);
 }
 
+/* Tray */
 #tray {
+    border-bottom: solid 3px transparent;
 }
 
 #tray > .passive {
@@ -129,13 +164,13 @@ window#waybar > box {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background: alpha(@warning, 0.2);
+    border-bottom: solid 3px @error;
 }
 
 /* Tooltip */
 tooltip {
     background: @background;
-    border: 1px solid @primary;
+    border: 1px solid @outline;
     border-radius: 0;
 }
 
