@@ -87,10 +87,18 @@ window#waybar {
     border-bottom: solid 3px @error;
 }
 
+#cpu:hover {
+    background: alpha(@error, 0.15);
+}
+
 /* Memory - tertiary color */
 #memory {
     color: @tertiary;
     border-bottom: solid 3px @tertiary;
+}
+
+#memory:hover {
+    background: alpha(@tertiary, 0.15);
 }
 
 /* Battery - primary normally, changes based on state */
@@ -98,6 +106,10 @@ window#waybar {
     color: @primary;
     border-bottom: solid 3px @primary;
     margin-right: 8px;
+}
+
+#battery:hover {
+    background: alpha(@primary, 0.15);
 }
 
 #battery.warning {
@@ -121,6 +133,10 @@ window#waybar {
     border-bottom: solid 3px @primary;
 }
 
+#network:hover {
+    background: alpha(@primary, 0.15);
+}
+
 #network.disconnected {
     color: @error;
     border-bottom: solid 3px @error;
@@ -130,6 +146,10 @@ window#waybar {
 #bluetooth {
     color: @secondary;
     border-bottom: solid 3px @secondary;
+}
+
+#bluetooth:hover {
+    background: alpha(@secondary, 0.15);
 }
 
 #bluetooth.connected {
@@ -146,6 +166,10 @@ window#waybar {
 #wireplumber {
     color: @tertiary;
     border-bottom: solid 3px @tertiary;
+}
+
+#wireplumber:hover {
+    background: alpha(@tertiary, 0.15);
 }
 
 #wireplumber.muted {
