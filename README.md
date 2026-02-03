@@ -59,3 +59,9 @@ matugen image ~/path/to/wallpaper.jpg
 ```
 
 This updates waybar, wofi, dunst, and hyprland colors to match.
+
+## Acknowledgments
+
+- [ranjan](https://codeberg.org/ranjan/waybar) - waybar style inspiration
+- [brunoanc](https://gist.github.com/brunoanc/2dea6ddf6974ba4e5d26c3139ffb7580) - Hyprland screen sharing guide
+- [agargara](https://gist.github.com/agargara/5eab0b720a6936ac3c59dd974693431f) - Tomorrow Night tmux theme
