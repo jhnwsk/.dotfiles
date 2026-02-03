@@ -75,7 +75,8 @@ function run_desktop {
     # Hyprland and Wayland tools
     pkg_install waybar dunst wofi swww wl-clipboard grim slurp wlogout brightnessctl
     pkg_install hypridle hyprlock nwg-displays kitty btop kanshi
-    aur_install matugen-bin better-control-git
+    pkg_install matugen
+    aur_install better-control-git
 
     # Config symlinks (link_dir removes existing dirs first)
     link_dir "$(pwd)/.config/hypr" "$HOME/.config/hypr"
